@@ -46,13 +46,19 @@
   --mono:"JetBrains Mono",ui-monospace,Menlo,"Noto Sans Bengali",monospace;
   --shadow:0 1px 2px rgba(14,38,32,.05), 0 10px 28px -14px rgba(14,38,32,.14);
   --pad:clamp(17px,4.5vw,30px);
+  /* Type scale. Three tokens cover every size below the headings, so the
+     page has one detail size rather than .92/.93/.95/.98em drifting apart.
+     --fs-label stays at 11.5px, the floor set in the readability targets. */
+  --fs-label:11.5px;   /* mono uppercase micro-labels: tags, chips, th, eyebrow */
+  --fs-data:12.5px;    /* mono numerals: rail times, amounts, section numbers */
+  --fs-detail:.9em;    /* secondary copy: rail small, fallbacks, tables, footer */
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--paper);color:var(--ink);
   font-family:var(--body);
-  font-size:clamp(16.5px,0.98rem + 0.28vw,19px);
+  font-size:clamp(15.5px,0.94rem + 0.22vw,16.5px);
   line-height:1.62;
   font-feature-settings:"kern" 1;
 }
@@ -65,9 +71,9 @@ body[data-lang="bn"]{font-family:var(--body-bn);line-height:1.92}
 body[data-lang="bn"] h1,
 body[data-lang="bn"] h2,
 body[data-lang="bn"] .day__title{font-family:var(--disp-bn);line-height:1.38;letter-spacing:0}
-body[data-lang="bn"] h1{font-size:clamp(30px,7vw,52px);font-weight:800}
-body[data-lang="bn"] h2{font-size:clamp(22px,4.4vw,30px);font-weight:700}
-body[data-lang="bn"] .day__title{font-size:clamp(20px,4.2vw,27px);font-weight:700}
+body[data-lang="bn"] h1{font-size:clamp(26px,5.6vw,40px);font-weight:800}
+body[data-lang="bn"] h2{font-size:clamp(19px,3.4vw,25px);font-weight:700}
+body[data-lang="bn"] .day__title{font-size:clamp(18px,3.4vw,22px);font-weight:700}
 body[data-lang="bn"] h3{font-family:var(--body-bn);font-weight:600;line-height:1.65}
 /* Anek Bangla has no true italic; a synthesised slant is wrong for Bengali. */
 body[data-lang="bn"] .mast h1 em{font-style:normal;font-weight:400}
@@ -90,9 +96,9 @@ body[data-lang="bn"] .tag,
 body[data-lang="bn"] .day__id,
 body[data-lang="bn"] .fact dt,
 body[data-lang="bn"] .tbl th,
-body[data-lang="bn"] .fallback b{font-size:13px;line-height:1.6}
-body[data-lang="bn"] h2 .num{font-size:15px;vertical-align:.3em}
-body[data-lang="bn"] .src{font-size:13px;font-weight:400;line-height:1.85}
+body[data-lang="bn"] .fallback b{font-size:12.5px;line-height:1.6}
+body[data-lang="bn"] h2 .num{font-size:13.5px;vertical-align:.3em}
+body[data-lang="bn"] .src{font-size:12.5px;font-weight:400;line-height:1.85}
 body[data-lang="bn"] .dek,body[data-lang="bn"] .sub{line-height:1.88}
 body[data-lang="bn"] .rail .what b{line-height:1.55}
 body[data-lang="bn"] .rail .what small,
@@ -114,13 +120,13 @@ body[data-lang="bn"] .panel p{max-width:58ch}
   border-bottom:1px solid var(--rule-soft)
 }
 .langbar button{
-  font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.09em;text-transform:uppercase;
   background:transparent;color:var(--ink-2);border:1px solid var(--rule);
   min-height:44px;padding:0 20px;cursor:pointer;line-height:1;
   transition:background .15s,color .15s
 }
 .langbar button:first-of-type{
-  border-right:0;font-family:var(--body-bn);font-size:15px;
+  border-right:0;font-family:var(--body-bn);font-size:13.5px;
   letter-spacing:0;text-transform:none;font-weight:600
 }
 .langbar button:hover{background:var(--jade-soft);color:var(--jade)}
@@ -130,34 +136,34 @@ body[data-lang="bn"] .panel p{max-width:58ch}
 /* ===================== masthead ===================== */
 .mast{padding:40px 0 36px;border-bottom:2px solid var(--ink)}
 .eyebrow{
-  font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.15em;text-transform:uppercase;
   color:var(--jade);margin:0 0 22px;line-height:1.5
 }
 .mast h1{
-  font-family:var(--disp);font-weight:800;font-size:clamp(36px,8.4vw,70px);
-  line-height:1;letter-spacing:-.02em;margin:0
+  font-family:var(--disp);font-weight:800;font-size:clamp(30px,6.4vw,48px);
+  line-height:1.04;letter-spacing:-.02em;margin:0
 }
 .mast h1 em{font-style:italic;font-weight:400;color:var(--jade)}
-.dek{font-size:1.06em;color:var(--ink-2);margin:22px 0 0;max-width:56ch}
+.dek{font-size:1.05em;color:var(--ink-2);margin:22px 0 0;max-width:56ch}
 
 .facts{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:1px;background:var(--rule);border:1px solid var(--rule);margin:36px 0 0
 }
 .fact{background:var(--paper);padding:15px 17px}
-.fact dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:0 0 7px;line-height:1.4}
+.fact dt{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:0 0 7px;line-height:1.4}
 .fact dd{margin:0;font-size:.95em;font-weight:700;line-height:1.4}
 .fact dd span{display:block;font-weight:400;font-size:.87em;color:var(--ink-2);margin-top:3px}
 
 /* ===================== sections ===================== */
 section{margin:clamp(52px,9vw,80px) 0 0}
 h2{
-  font-family:var(--disp);font-weight:600;font-size:clamp(25px,5vw,34px);
-  letter-spacing:-.015em;margin:0 0 12px;line-height:1.15
+  font-family:var(--disp);font-weight:600;font-size:clamp(21px,3.8vw,27px);
+  letter-spacing:-.015em;margin:0 0 12px;line-height:1.2
 }
-h2 .num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--jade);vertical-align:.8em;margin-right:11px;letter-spacing:.08em}
+h2 .num{font-family:var(--mono);font-size:var(--fs-data);font-weight:600;color:var(--jade);vertical-align:.7em;margin-right:11px;letter-spacing:.08em}
 h3{font-family:var(--body);font-weight:700;font-size:1em;margin:34px 0 12px;line-height:1.4}
-.sub{color:var(--ink-2);margin:0 0 28px;max-width:64ch;font-size:.98em}
+.sub{color:var(--ink-2);margin:0 0 28px;max-width:64ch;font-size:1em}
 p{margin:0 0 15px}
 strong{font-weight:700}
 
@@ -172,7 +178,7 @@ strong{font-weight:700}
 .panel h3:first-child{margin-top:0}
 .panel p{max-width:66ch}
 .panel .tag{
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.13em;text-transform:uppercase;
   color:var(--alert);background:var(--alert-soft);display:inline-block;
   padding:6px 11px;margin:0 0 16px;line-height:1.3
 }
@@ -190,10 +196,10 @@ strong{font-weight:700}
   padding:22px var(--pad);border-bottom:1px solid var(--rule-soft);
   display:flex;flex-wrap:wrap;gap:11px;align-items:center;justify-content:space-between
 }
-.day__id{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);line-height:1.4}
-.day__title{font-family:var(--disp);font-weight:600;font-size:clamp(22px,4.8vw,30px);letter-spacing:-.015em;margin:10px 0 0;line-height:1.18;width:100%}
+.day__id{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);line-height:1.4}
+.day__title{font-family:var(--disp);font-weight:600;font-size:clamp(19px,3.6vw,24px);letter-spacing:-.015em;margin:10px 0 0;line-height:1.22;width:100%}
 .chip{
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;
   padding:6px 11px;white-space:nowrap;line-height:1.3
 }
 .chip--dry{color:var(--jade);background:var(--jade-soft)}
@@ -205,7 +211,7 @@ strong{font-weight:700}
 .rail li::before{content:"";position:absolute;left:25px;top:0;bottom:-20px;width:1px;background:var(--rule-soft)}
 .rail li:last-child::before{bottom:auto;height:26px}
 .rail time{
-  font-family:var(--mono);font-size:13.5px;font-weight:600;color:var(--jade);
+  font-family:var(--mono);font-size:var(--fs-data);font-weight:600;color:var(--jade);
   padding-top:3px;position:relative;z-index:1;line-height:1.4
 }
 .rail time::after{
@@ -215,38 +221,38 @@ strong{font-weight:700}
 .rail li.is-key time::after{background:var(--jade);box-shadow:0 0 0 3px var(--jade-soft)}
 .rail .what{margin:0;max-width:60ch}
 .rail .what b{display:block;font-weight:700;font-size:1em;line-height:1.45}
-.rail .what small{display:block;color:var(--ink-2);font-size:.93em;line-height:1.65;margin-top:6px}
+.rail .what small{display:block;color:var(--ink-2);font-size:var(--fs-detail);line-height:1.65;margin-top:6px}
 
 .fallback{margin:0;padding:20px 22px;background:var(--silt-soft);border-left:3px solid var(--silt)}
-.fallback b{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--silt);display:block;margin-bottom:9px;line-height:1.3}
-.fallback p{margin:0;font-size:.95em;line-height:1.68;max-width:64ch}
+.fallback b{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;color:var(--silt);display:block;margin-bottom:9px;line-height:1.3}
+.fallback p{margin:0;font-size:var(--fs-detail);line-height:1.68;max-width:64ch}
 .fallback-wrap{padding:0 var(--pad) var(--pad)}
 
 /* ===================== lists & tables ===================== */
 ul.plain{list-style:none;padding:0;margin:0 0 20px}
-ul.plain li{padding:13px 0 13px 24px;border-bottom:1px solid var(--rule-soft);position:relative;font-size:.98em;line-height:1.68;max-width:66ch}
+ul.plain li{padding:13px 0 13px 24px;border-bottom:1px solid var(--rule-soft);position:relative;font-size:1em;line-height:1.68;max-width:66ch}
 ul.plain li:last-child{border-bottom:0}
 ul.plain li::before{content:"";position:absolute;left:2px;top:24px;width:10px;height:1.5px;background:var(--jade)}
 
-.tbl{width:100%;border-collapse:collapse;font-size:.95em;margin:0 0 14px}
+.tbl{width:100%;border-collapse:collapse;font-size:var(--fs-detail);margin:0 0 14px}
 .tbl th,.tbl td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
-.tbl th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--rule);padding-bottom:10px;line-height:1.4}
+.tbl th{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--rule);padding-bottom:10px;line-height:1.4}
 .tbl td:last-child,.tbl th:last-child{padding-right:0}
-.tbl .amt{font-family:var(--mono);font-size:13px;white-space:nowrap;color:var(--ink-2)}
+.tbl .amt{font-family:var(--mono);font-size:var(--fs-data);white-space:nowrap;color:var(--ink-2)}
 .tbl .total td{border-top:2px solid var(--ink);border-bottom:0;font-weight:700;padding-top:16px}
-.tbl .total .amt{color:var(--ink);font-size:14px}
+.tbl .total .amt{color:var(--ink);font-size:13.5px}
 .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tbl-scroll .tbl{min-width:520px}
 
 .grid2{display:grid;grid-template-columns:1fr;gap:0}
 @media(min-width:680px){.grid2{grid-template-columns:1fr 1fr;gap:0 44px}}
 
-.note{font-size:.92em;color:var(--ink-2);line-height:1.7;margin:16px 0 0;max-width:66ch}
-.src{font-family:var(--mono);font-size:12px;color:var(--ink-2);line-height:1.75}
+.note{font-size:var(--fs-detail);color:var(--ink-2);line-height:1.7;margin:16px 0 0;max-width:66ch}
+.src{font-family:var(--mono);font-size:var(--fs-data);color:var(--ink-2);line-height:1.75}
 a{color:var(--jade);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{background:var(--jade-soft)}
 a:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
-footer{margin:80px 0 0;padding:30px 0 0;border-top:2px solid var(--ink);font-size:.92em;color:var(--ink-2)}
+footer{margin:80px 0 0;padding:30px 0 0;border-top:2px solid var(--ink);font-size:var(--fs-detail);color:var(--ink-2)}
 footer p{max-width:70ch}
 
 /* ===================== MOBILE ===================== */
@@ -267,16 +273,16 @@ footer p{max-width:70ch}
   .day__title{margin-top:8px}
   h3{margin-top:28px}
 
-  /* Headline sizes were hitting their clamp() floor at phone widths anyway
-     (e.g. 8.4vw < 36px min below ~430px) but the heavy display weights still
-     read oversized next to 16-17px body copy — tighten the floor and ceiling
-     specifically for this breakpoint instead of relying on the desktop clamp. */
-  .mast h1{font-size:clamp(28px,9vw,36px)}
-  body[data-lang="bn"] h1{font-size:clamp(26px,8.4vw,34px)}
-  h2{font-size:clamp(21px,5.6vw,26px)}
-  body[data-lang="bn"] h2{font-size:clamp(20px,5.4vw,24px)}
-  .day__title{font-size:clamp(19px,5vw,23px)}
-  body[data-lang="bn"] .day__title{font-size:clamp(18px,4.8vw,22px)}
+  /* Headline sizes hit their clamp() floor at phone widths anyway, but the
+     heavy display weights still read oversized next to ~15.5px body copy —
+     tighten the floor and ceiling specifically for this breakpoint instead
+     of relying on the desktop clamp. */
+  .mast h1{font-size:clamp(25px,7.2vw,30px)}
+  body[data-lang="bn"] h1{font-size:clamp(23px,6.8vw,28px)}
+  h2{font-size:clamp(19px,4.6vw,22px)}
+  body[data-lang="bn"] h2{font-size:clamp(18px,4.4vw,21px)}
+  .day__title{font-size:clamp(17.5px,4.2vw,20px)}
+  body[data-lang="bn"] .day__title{font-size:clamp(17px,4vw,19.5px)}
 
   /* The 1.85-1.95 Bangla line-height (set for desktop legibility) reads as
      sprawling on a narrow phone column — hold it looser than Latin but tighter
