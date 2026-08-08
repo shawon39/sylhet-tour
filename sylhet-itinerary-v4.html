@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
 <meta name="theme-color" content="#EDF0E9">
-<title>সিলেট · ২২–২৫ আগস্ট ২০২৬ · ভ্রমণসূচি / Sylhet Itinerary</title>
+<title>সিলেট · ২২–২৫ আগস্ট ২০২৬ · ট্রিপ প্ল্যান / Sylhet Trip Plan</title>
 <!-- Favicon is an inline SVG so the page stays a single self-contained file —
      it survives being emailed or saved to a phone, unlike a linked icon. -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%23136350'/%3E%3Cpath%20d='M2.5%2020L10%207.5L15.5%2015.5L20.5%209L29.5%2020Z'%20fill='%23EDF0E9'/%3E%3Crect%20x='4'%20y='23.5'%20width='24'%20height='3'%20rx='1.5'%20fill='%23EDF0E9'/%3E%3C/svg%3E">
@@ -136,6 +136,58 @@ body[data-lang="bn"] .panel p{max-width:58ch}
 .langbar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .langbar button:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
 
+/* ===================== table of contents =====================
+   Two forms from one markup. Narrow screens get a collapsed <details>
+   that sticks under the language bar, so navigation is always one tap
+   away. From 1300px there is room beside the 860px column, so it
+   becomes a fixed left sidebar and the summary is hidden.
+   The 1300px floor is arithmetic, not taste: the column needs
+   2 × (430 + 16 + 24 + 176) of viewport before a 176px rail fits
+   without overlapping it. */
+.toc{
+  position:sticky;top:70px;z-index:16;margin:0 0 26px;
+  border:1px solid var(--rule);background:var(--card);box-shadow:var(--shadow);
+  /* Opened on a short screen the list is taller than the viewport, so it
+     scrolls inside itself rather than running off the bottom. */
+  max-height:calc(100vh - 84px);overflow-y:auto;overscroll-behavior:contain
+}
+.toc > summary{
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--jade);padding:0 16px;cursor:pointer;list-style:none;
+  min-height:44px;display:flex;align-items:center;gap:8px
+}
+.toc > summary::-webkit-details-marker{display:none}
+.toc > summary::after{content:"+";margin-left:auto;font-size:15px;line-height:1}
+.toc[open] > summary::after{content:"–"}
+.toc > summary:focus-visible{outline:2px solid var(--jade);outline-offset:-2px}
+body[data-lang="bn"] .toc > summary{
+  font-family:var(--body-bn);font-size:13px;letter-spacing:0;text-transform:none;font-weight:600
+}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc__list{padding:4px 14px 14px}
+.toc a{
+  display:block;padding:7px 0 7px 11px;text-decoration:none;color:var(--ink-2);
+  font-size:var(--fs-detail);line-height:1.35;border-left:2px solid var(--rule-soft)
+}
+.toc a:hover{color:var(--jade);background:var(--jade-soft);border-left-color:var(--jade)}
+.toc a:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+.toc a.is-here{color:var(--jade);border-left-color:var(--jade);font-weight:700}
+.toc__n{font-family:var(--mono);font-size:var(--fs-label);color:var(--jade);margin-right:7px}
+body[data-lang="bn"] .toc__n{font-family:var(--body-bn);font-size:12px}
+.toc__sub{padding-left:12px}
+.toc__sub a{font-size:.84em;padding-top:5px;padding-bottom:5px}
+/* Sticky bars would otherwise sit on top of whatever you jumped to. */
+[id^="s0"],[id^="day"]{scroll-margin-top:88px}
+@media(min-width:1300px){
+  .toc{
+    position:fixed;top:24px;left:max(16px,calc(50vw - 646px));width:176px;
+    max-height:calc(100vh - 48px);overflow-y:auto;overscroll-behavior:contain;
+    border:0;background:transparent;box-shadow:none;margin:0
+  }
+  .toc > summary{display:none}
+  .toc__list{padding:0}
+}
+
 /* ===================== masthead ===================== */
 .mast{padding:40px 0 36px;border-bottom:2px solid var(--ink)}
 .eyebrow{
@@ -149,10 +201,14 @@ body[data-lang="bn"] .panel p{max-width:58ch}
 .mast h1 em{font-style:italic;font-weight:400;color:var(--jade)}
 .dek{font-size:1.05em;color:var(--ink-2);margin:22px 0 0;max-width:56ch}
 
+/* Fixed column counts, not auto-fit: there are exactly six cells, and
+   auto-fit packed five onto the first row and left four columns of bare
+   grid background beside the sixth. Three columns divide evenly. */
 .facts{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  display:grid;grid-template-columns:repeat(2,1fr);
   gap:1px;background:var(--rule);border:1px solid var(--rule);margin:36px 0 0
 }
+@media(min-width:680px){.facts{grid-template-columns:repeat(3,1fr)}}
 .fact{background:var(--paper);padding:15px 17px}
 .fact dt{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:0 0 7px;line-height:1.4}
 .fact dd{margin:0;font-size:.95em;font-weight:700;line-height:1.4}
@@ -340,7 +396,7 @@ footer p{max-width:70ch}
 @media print{
   body{background:#fff;font-size:11pt}
   .wrap{max-width:none;padding:0}
-  .langbar{display:none}
+  .langbar,.toc{display:none}
   .day,.panel{break-inside:avoid;border:1px solid #999;box-shadow:none}
   a{text-decoration:none;color:inherit}
   section{margin-top:30px}
@@ -364,6 +420,29 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   <button type="button" id="btn-en" aria-pressed="false">English</button>
 </div>
 
+<details class="toc" id="toc">
+  <summary><span data-t="en">Contents</span><span data-t="bn">সূচিপত্র</span></summary>
+  <ol class="toc__list">
+    <li><a href="#s01"><span class="toc__n" data-t="en">01</span><span class="toc__n" data-t="bn">০১</span><span data-t="en">Before you book</span><span data-t="bn">বুক করার আগে</span></a></li>
+    <li><a href="#s02"><span class="toc__n" data-t="en">02</span><span class="toc__n" data-t="bn">০২</span><span data-t="en">Transport</span><span data-t="bn">যাতায়াত</span></a></li>
+    <li><a href="#s03"><span class="toc__n" data-t="en">03</span><span class="toc__n" data-t="bn">০৩</span><span data-t="en">Day by day</span><span data-t="bn">দিন ধরে ধরে</span></a></li>
+    <li><ol class="toc__sub">
+      <li><a href="#day1"><span data-t="en">Day 1 · Arrive</span><span data-t="bn">১ম দিন · পৌঁছানো</span></a></li>
+      <li><a href="#day2"><span data-t="en">Day 2 · Jaflong</span><span data-t="bn">২য় দিন · জাফলং</span></a></li>
+      <li><a href="#day3"><span data-t="en">Day 3 · compare</span><span data-t="bn">৩য় দিন · তুলনা</span></a></li>
+      <li><a href="#day3a"><span data-t="en">Day 3 · Option A</span><span data-t="bn">৩য় দিন · অপশন A</span></a></li>
+      <li><a href="#day3b"><span data-t="en">Day 3 · Option B</span><span data-t="bn">৩য় দিন · অপশন B</span></a></li>
+      <li><a href="#day4"><span data-t="en">Day 4 · Fly out</span><span data-t="bn">৪র্থ দিন · ফেরা</span></a></li>
+    </ol></li>
+    <li><a href="#s04"><span class="toc__n" data-t="en">04</span><span class="toc__n" data-t="bn">০৪</span><span data-t="en">Food</span><span data-t="bn">খাবার</span></a></li>
+    <li><a href="#s05"><span class="toc__n" data-t="en">05</span><span class="toc__n" data-t="bn">০৫</span><span data-t="en">Weather</span><span data-t="bn">আবহাওয়া</span></a></li>
+    <li><a href="#s06"><span class="toc__n" data-t="en">06</span><span class="toc__n" data-t="bn">০৬</span><span data-t="en">Safety</span><span data-t="bn">নিরাপত্তা</span></a></li>
+    <li><a href="#s07"><span class="toc__n" data-t="en">07</span><span class="toc__n" data-t="bn">০৭</span><span data-t="en">Packing</span><span data-t="bn">প্যাকিং</span></a></li>
+    <li><a href="#s08"><span class="toc__n" data-t="en">08</span><span class="toc__n" data-t="bn">০৮</span><span data-t="en">Cost</span><span data-t="bn">খরচ</span></a></li>
+    <li><a href="#s09"><span class="toc__n" data-t="en">09</span><span class="toc__n" data-t="bn">০৯</span><span data-t="en">Before Dhaka</span><span data-t="bn">ঢাকা ছাড়ার আগে</span></a></li>
+  </ol>
+</details>
+
 <header class="mast">
   <p class="eyebrow">
     <span data-t="en">Dhaka → Sylhet · 4 days, 3 nights · Monsoon season</span>
@@ -371,18 +450,18 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   </p>
   <h1>
     <span data-t="en">Sylhet trip plan</span>
-    <span data-t="bn">সিলেট ভ্রমণ পরিকল্পনা</span>
+    <span data-t="bn">সিলেট ট্রিপ প্ল্যান</span>
   </h1>
   <p class="dek">
-    <span data-t="en">A relaxed, child-safe plan for four couples and two toddlers. Built for late August, so every water-based stop has a fallback listed with it.</span>
-    <span data-t="bn">চার দম্পতি আর দুই শিশুর জন্য একটি আরামদায়ক, শিশু-নিরাপদ পরিকল্পনা। আগস্টের শেষভাগের কথা মাথায় রেখে তৈরি, তাই পানিনির্ভর প্রতিটি গন্তব্যের সঙ্গেই বিকল্প পরিকল্পনা দেওয়া আছে।</span>
+    <span data-t="en">A relaxed, child-safe plan for four families and two toddlers. Built for late August, so every water-based stop has a fallback listed with it.</span>
+    <span data-t="bn">চারটি ফ্যামিলি আর দুই বাচ্চার জন্য আরামদায়ক, বাচ্চাদের জন্য নিরাপদ একটা প্ল্যান। আগস্টের শেষের কথা মাথায় রেখে তৈরি, তাই পানির উপর নির্ভরশীল প্রতিটি স্পটের সঙ্গেই একটা ব্যাকআপ প্ল্যান দেওয়া আছে।</span>
   </p>
 
   <dl class="facts">
     <div class="fact"><dt><span data-t="en">Dates</span><span data-t="bn">তারিখ</span></dt>
       <dd><span data-t="en">22–25 Aug 2026<span>Sat → Tue</span></span><span data-t="bn">২২–২৫ আগস্ট ২০২৬<span>শনি → মঙ্গল</span></span></dd></div>
-    <div class="fact"><dt><span data-t="en">Group</span><span data-t="bn">দল</span></dt>
-      <dd><span data-t="en">8 adults<span>+ children aged 2 and 4</span></span><span data-t="bn">৮ জন প্রাপ্তবয়স্ক<span>+ ২ ও ৪ বছরের দুই শিশু</span></span></dd></div>
+    <div class="fact"><dt><span data-t="en">Group</span><span data-t="bn">গ্রুপ</span></dt>
+      <dd><span data-t="en">8 adults<span>+ children aged 2 and 4</span></span><span data-t="bn">৮ জন অ্যাডাল্ট<span>+ ২ ও ৪ বছরের দুই বাচ্চা</span></span></dd></div>
     <div class="fact"><dt><span data-t="en">Outbound</span><span data-t="bn">যাওয়া</span></dt>
       <dd><span data-t="en">Train 6:30 AM<span>Parabat Express, Sat 22 Aug</span></span><span data-t="bn">ট্রেন সকাল ৬:৩০<span>পারাবত এক্সপ্রেস, শনি ২২ আগস্ট</span></span></dd></div>
     <div class="fact"><dt><span data-t="en">Return</span><span data-t="bn">ফেরা</span></dt>
@@ -395,7 +474,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
 </header>
 
 <!-- ================= 01 ================= -->
-<section>
+<section id="s01">
   <h2><span class="num" data-t="en">01</span><span class="num" data-t="bn">০১</span><span data-t="en">Read this before you book anything</span><span data-t="bn">কিছু বুক করার আগে এটা পড়ুন</span></h2>
   <p class="sub"><span data-t="en">Four things to settle before you book. All four are easy if you handle them now.</span><span data-t="bn">বুক করার আগে চারটি জিনিস ঠিক করে নিন। এখনই হাতে নিলে চারটিই সহজ।</span></p>
 
@@ -403,8 +482,6 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
     <span class="tag"><span data-t="en">1 · Flooding</span><span data-t="bn">১ · বন্যা</span></span>
     <p data-t="en">Late August is Sylhet's flood season. Sylhet does not flood from its own rain — it floods from the Meghalaya hills upstream. In a comparable event, Cherrapunji recorded <strong>395&nbsp;mm in 24 hours</strong> and Sylhet's rivers rose sharply within a day. The sky over your hotel can be clear while the Piyain at Jaflong is rising fast.</p>
     <p data-t="bn">আগস্টের শেষভাগ সিলেটের বন্যার মৌসুম। সিলেটে বন্যা হয় স্থানীয় বৃষ্টিতে নয় — উজানে মেঘালয়ের পাহাড়ি ঢলে। এমনই এক ঘটনায় চেরাপুঞ্জিতে <strong>২৪ ঘণ্টায় ৩৯৫ মিলিমিটার</strong> বৃষ্টি রেকর্ড হয়, আর একদিনের মধ্যেই সিলেটের নদীগুলোর পানি দ্রুত বেড়ে যায়। আপনার হোটেলের উপরের আকাশ ঝকঝকে থাকতে পারে, অথচ ঠিক তখনই জাফলংয়ে পিয়াইনের পানি দ্রুত বাড়ছে।</p>
-    <p data-t="en"><strong>How this July went.</strong> Levels on the Surma and Kushiyara crossed danger level and fell back three times in three weeks; by <strong>26 July</strong> the FFWC bulletin listed only Kushiyara at Fenchuganj still above it, and falling. Read that as a pattern, not a forecast — your trip is a month later, inside the same season, so expect conditions to shift every few days.</p>
-    <p data-t="bn"><strong>এই জুলাই মাসটা কেমন গেল।</strong> তিন সপ্তাহে তিনবার সুরমা ও কুশিয়ারার পানি বিপৎসীমা ছাড়িয়েছে আর নেমেছে; <strong>২৬ জুলাই</strong> এফএফডব্লিউসির বুলেটিনে কেবল ফেঞ্চুগঞ্জে কুশিয়ারার পানিই বিপৎসীমার উপরে ছিল, তাও কমছিল। এটাকে পূর্বাভাস নয়, একটা ধরন হিসেবে দেখুন — আপনাদের যাত্রা এক মাস পরে, একই মৌসুমের ভেতরেই, তাই ধরে নিন কয়েকদিন পরপরই পরিস্থিতি বদলাবে।</p>
     <p data-t="en"><strong>What to do:</strong> check <a href="https://ffwc.gov.bd">ffwc.gov.bd</a> daily from about 15 August, and again each morning of the trip. Then ask the hotel front desk to phone the ghat before Day 2 and Day 3. Locals know hours before any website does.</p>
     <p data-t="bn"><strong>করণীয়:</strong> ১৫ আগস্ট থেকে প্রতিদিন <a href="https://ffwc.gov.bd">ffwc.gov.bd</a> দেখুন, আর ভ্রমণের প্রতিটি সকালেও দেখুন। এরপর ২য় ও ৩য় দিনের আগে হোটেলের রিসেপশন থেকে ঘাটে ফোন করান। যেকোনো ওয়েবসাইটের অনেক আগেই স্থানীয় মানুষ খবরটা জানে।</p>
   </div>
@@ -418,7 +495,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   </div>
 
   <div class="panel panel--jade">
-    <span class="tag"><span data-t="en">3 · Boats and the 2-year-old</span><span data-t="bn">৩ · নৌকা আর দুই বছরের শিশু</span></span>
+    <span class="tag"><span data-t="en">3 · Boats and the 2-year-old</span><span data-t="bn">৩ · নৌকা আর দুই বছরের বাচ্চা</span></span>
     <p data-t="en">The boat rides need the most care of anything here, and they are manageable. The rules are in section 06. If any of them cannot be met on the day, <strong>skip the boat</strong>.</p>
     <p data-t="bn">এই ভ্রমণে নৌকার অংশটাতেই সবচেয়ে বেশি সতর্কতা লাগে, আর সেটা সামলানো কঠিন নয়। নিয়মগুলো ০৬ নম্বর অংশে দেওয়া আছে। সেদিন কোনো একটি নিয়ম মানা না গেলে <strong>নৌকায় উঠবেন না</strong>।</p>
   </div>
@@ -433,9 +510,9 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
 </section>
 
 <!-- ================= 02 ================= -->
-<section>
-  <h2><span class="num" data-t="en">02</span><span class="num" data-t="bn">০২</span><span data-t="en">Transport — my recommendation</span><span data-t="bn">যাতায়াত — আমার পরামর্শ</span></h2>
-  <p class="sub"><span data-t="en">You asked me to pick. Here it is.</span><span data-t="bn">আপনি বলেছিলেন আমি যেন একটা দিক বেছে নিই। এই সেটা।</span></p>
+<section id="s02">
+  <h2><span class="num" data-t="en">02</span><span class="num" data-t="bn">০২</span><span data-t="en">Transport</span><span data-t="bn">যাতায়াত</span></h2>
+  <p class="sub"><span data-t="en">One vehicle for the whole trip. What to book and why.</span><span data-t="bn">পুরো ট্রিপের জন্য একটাই গাড়ি। কী বুক করবেন আর কেন।</span></p>
 
   <div class="panel panel--jade">
     <span class="tag"><span data-t="en">Decision</span><span data-t="bn">সিদ্ধান্ত</span></span>
@@ -446,23 +523,23 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   <h3><span data-t="en">Why not day-wise hire</span><span data-t="bn">কেন প্রতিদিন আলাদা করে ভাড়া নয়</span></h3>
   <ul class="plain">
     <li><span data-t="en"><strong>Ten people don't fit in a car.</strong> Two sedans means two drivers, two negotiations, and a split group on the rough Gowainghat approach road. A Hiace takes 8 adults, 2 kids and the bags with room to spare.</span>
-      <span data-t="bn"><strong>দশজন মানুষ একটা গাড়িতে ধরে না।</strong> দুইটা প্রাইভেট কার মানে দুইজন ড্রাইভার, দুইবার দরদাম, আর গোয়াইনঘাটের খারাপ রাস্তায় দল দুই ভাগ হয়ে যাওয়া। একটা হাইএসে ৮ জন বড়, ২ জন শিশু আর সব ব্যাগ স্বচ্ছন্দে ধরে যায়।</span></li>
+      <span data-t="bn"><strong>দশজন মানুষ একটা গাড়িতে ধরে না।</strong> দুইটা প্রাইভেট কার মানে দুইজন ড্রাইভার, দুইবার দরদাম, আর গোয়াইনঘাটের খারাপ রাস্তায় গ্রুপ দুই ভাগ হয়ে যাওয়া। একটা হাইএসে ৮ জন বড়, ২ জন বাচ্চা আর সব ব্যাগ স্বচ্ছন্দে ধরে যায়।</span></li>
     <li><span data-t="en"><strong>Fixed rate beats a fresh haggle every morning.</strong> Hiring off the stand at Kadamtali or Ambarkhana means paying tourist rates while ten people stand in the rain.</span>
       <span data-t="bn"><strong>প্রতিদিন নতুন করে দরদামের চেয়ে নির্দিষ্ট ভাড়া ভালো।</strong> কদমতলী বা আম্বরখানার স্ট্যান্ড থেকে গাড়ি নেওয়া মানে দশজন মানুষ বৃষ্টিতে দাঁড়িয়ে থাকা অবস্থায় ট্যুরিস্ট রেট গোনা।</span></li>
     <li><span data-t="en"><strong>A hotel-arranged driver is traceable.</strong> With children in the vehicle, on flood-season roads, with no mobile signal past Salutikor, that is worth more than the roughly 10% you'd save bargaining. This is the whole argument.</span>
-      <span data-t="bn"><strong>হোটেলের ঠিক করা ড্রাইভারের হদিস পাওয়া যায়।</strong> গাড়িতে শিশু, রাস্তায় বন্যার মৌসুম, আর সালুটিকর পেরোলেই মোবাইল নেটওয়ার্ক নেই — এই অবস্থায় দরদাম করে বাঁচানো প্রায় ১০ শতাংশের চেয়ে এটা অনেক বেশি মূল্যবান। মূল যুক্তিটা এটাই।</span></li>
+      <span data-t="bn"><strong>হোটেলের ঠিক করা ড্রাইভারের হদিস পাওয়া যায়।</strong> গাড়িতে বাচ্চা, রাস্তায় বন্যার মৌসুম, আর সালুটিকর পেরোলেই মোবাইল নেটওয়ার্ক নেই — এই অবস্থায় দরদাম করে বাঁচানো প্রায় ১০ শতাংশের চেয়ে এটা অনেক বেশি মূল্যবান। মূল যুক্তিটা এটাই।</span></li>
     <li><span data-t="en"><strong>The vehicle becomes your dry room.</strong> Spare clothes, snacks, the kids' bags all stay in it. On a wet day that changes the trip.</span>
       <span data-t="bn"><strong>গাড়িটাই হয়ে ওঠে আপনার শুকনো ঘর।</strong> বাড়তি কাপড়, খাবার, বাচ্চাদের ব্যাগ — সব ওখানেই থাকবে। ভেজা একটা দিনে এটা পুরো ভ্রমণের চেহারা বদলে দেয়।</span></li>
   </ul>
 </section>
 
 <!-- ================= 03 ================= -->
-<section>
+<section id="s03">
   <h2><span class="num" data-t="en">03</span><span class="num" data-t="bn">০৩</span><span data-t="en">Day by day</span><span data-t="bn">দিন ধরে ধরে</span></h2>
-  <p class="sub"><span data-t="en">Two easy days bracket two touring days. Day 1, Day 2 and Day 4 are fixed. <strong>Day 3 has two options and you can only do one of them</strong> — the comparison and my recommendation are below the Day 2 card.</span><span data-t="bn">দুইটা সহজ দিনের মাঝখানে দুইটা ঘোরার দিন। ১ম, ২য় আর ৪র্থ দিন ফিক্সড। <strong>৩য় দিনে দুইটা অপশন আছে, আর এর একটাই করা যাবে</strong> — তুলনা আর আমার পরামর্শ ২য় দিনের কার্ডের নিচে দেওয়া আছে।</span></p>
+  <p class="sub"><span data-t="en">Two easy days bracket two touring days. Day 1, Day 2 and Day 4 are fixed. <strong>Day 3 has two options and you can only do one of them</strong> — the comparison is below the Day 2 card.</span><span data-t="bn">দুইটা সহজ দিনের মাঝখানে দুইটা ঘোরার দিন। ১ম, ২য় আর ৪র্থ দিন ফিক্সড। <strong>৩য় দিনে দুইটা অপশন আছে, আর এর একটাই করা যাবে</strong> — তুলনাটা ২য় দিনের কার্ডের নিচে দেওয়া আছে।</span></p>
 
   <!-- DAY 1 -->
-  <article class="day">
+  <article class="day" id="day1">
     <div class="day__head">
       <span class="day__id"><span data-t="en">Day 1 · Saturday 22 August</span><span data-t="bn">১ম দিন · শনিবার ২২ আগস্ট</span></span>
       <span class="chip chip--dry"><span data-t="en">Rain-proof</span><span data-t="bn">বৃষ্টিতেও নিরাপদ</span></span>
@@ -480,7 +557,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
       <li><time>13:20</time><p class="what">
         <b data-t="en">Sylhet Railway Station</b><b data-t="bn">সিলেট রেলস্টেশন</b>
         <small data-t="en">Approximate. Budget for 30–90 minutes of monsoon delay on this route and do not plan anything tight behind it.</small>
-        <small data-t="bn">আনুমানিক। এই রুটে বর্ষায় ৩০–৯০ মিনিট দেরি ধরে রাখুন, আর এর পিছনে আঁটসাঁট কোনো পরিকল্পনা রাখবেন না।</small></p></li>
+        <small data-t="bn">আনুমানিক। এই রুটে বর্ষায় ৩০–৯০ মিনিট দেরি ধরে রাখুন, আর এর পিছনে আঁটসাঁট কোনো প্ল্যান রাখবেন না।</small></p></li>
       <li><time>13:50</time><p class="what">
         <b data-t="en">Two CNG autos to the hotel</b><b data-t="bn">দুইটা সিএনজিতে হোটেলে</b>
         <small data-t="en">Hotel Noorjahan Grand, Dargah Gate. About 4&nbsp;km, 15–20 minutes.</small>
@@ -509,7 +586,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   </article>
 
   <!-- DAY 2 -->
-  <article class="day day--water">
+  <article class="day day--water" id="day2">
     <div class="day__head">
       <span class="day__id"><span data-t="en">Day 2 · Sunday 23 August</span><span data-t="bn">২য় দিন · রবিবার ২৩ আগস্ট</span></span>
       <span class="chip chip--water"><span data-t="en">Water-dependent</span><span data-t="bn">পানির উপর নির্ভরশীল</span></span>
@@ -536,8 +613,8 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
         <b data-t="en">Jaflong Zero Point</b><b data-t="bn">জাফলং জিরো পয়েন্ট</b>
         <small data-t="en">Boat onto the Piyain for the view of the Dawki bridge and the Meghalaya hills behind it. Life jackets on all ten. Agree the fare as a total before boarding.</small>
         <small data-t="bn">পিয়াইনে নৌকায় উঠে ডাউকি ব্রিজ আর তার পেছনের মেঘালয়ের পাহাড় দেখা। দশজনেরই লাইফ জ্যাকেট। ওঠার আগেই মোট ভাড়া ঠিক করে নিন।</small>
-        <small data-t="en"><strong>One expectation to set here too.</strong> Jaflong was declared an Ecologically Critical Area in 2020 and extraction stopped, but stone looting resumed after August 2024 and the riverbed has been worked over since; reporting says the stones are going and visitor numbers with them. Joint forces are now posted in the Jaflong ECA round the clock. What you came for — the Dawki bridge, the hills, the river from a boat — is unaffected. The stone-strewn bed in the older photographs is not what you will see.</small>
-        <small data-t="bn"><strong>এখানেও একটা প্রত্যাশা ঠিক করে নিন।</strong> ২০২০ সালে জাফলংকে প্রতিবেশগত সংকটাপন্ন এলাকা (ইসিএ) ঘোষণা করে পাথর তোলা বন্ধ করা হয়েছিল, কিন্তু ২০২৪-এর আগস্টের পর আবার লুট শুরু হয় আর নদীর তলদেশ থেকে পাথর তোলা চলতেই থাকে; রিপোর্ট বলছে পাথর কমে যাচ্ছে, সঙ্গে দর্শনার্থীও। এখন জাফলং ইসিএ এলাকায় ২৪ ঘণ্টা যৌথ বাহিনী মোতায়েন আছে। আপনি যেটার জন্য এসেছেন — ডাউকি ব্রিজ, পাহাড়, নৌকা থেকে নদী — সেটায় কোনো সমস্যা নেই। তবে পুরনো ছবিতে পাথরে ভরা যে তলদেশ দেখেন, সেটা দেখতে পাবেন না।</small></p></li>
+        <small data-t="en"><strong>Set one expectation here.</strong> Jaflong's riverbed has been stripped by stone extraction since 2024. The Dawki bridge, the hills and the river from a boat are unaffected — the stone-strewn bed in older photographs is not what you will see.</small>
+        <small data-t="bn"><strong>এখানে একটা প্রত্যাশা ঠিক করে নিন।</strong> ২০২৪ সাল থেকে পাথর তোলার কারণে জাফলংয়ের নদীর তলদেশ প্রায় ফাঁকা হয়ে গেছে। ডাউকি ব্রিজ, পাহাড় আর নৌকা থেকে নদী — এগুলোয় কোনো সমস্যা নেই; তবে পুরনো ছবিতে পাথরে ভরা যে তলদেশ দেখেন, সেটা পাবেন না।</small></p></li>
       <li><time>12:30</time><p class="what">
         <b data-t="en">Lunch</b><b data-t="bn">দুপুরের খাবার</b>
         <small data-t="en">Your packed boxes, or a roadside restaurant back at Jaintiapur on the return leg. Better food, cleaner kitchens.</small>
@@ -549,11 +626,11 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
       <li class="is-key"><time>14:45</time><p class="what">
         <b data-t="en">Lalakhal — with your expectations set</b><b data-t="bn">লালাখাল — প্রত্যাশাটা ঠিক রেখে</b>
         <small data-t="en"><strong>Set expectations before you go.</strong> Lalakhal is famous for transparent blue-green water, and that is a dry-season phenomenon. In late August the Sari river carries the same Meghalaya silt that drives the flooding, so expect brown. What you do get is genuinely good: a calm hour on a wide river between tea-estate slopes and Khasi hills, with the least dangerous current of any stop on this trip. Go for the ride and the setting, not the colour.</small>
-        <small data-t="bn"><strong>যাওয়ার আগেই দলের প্রত্যাশাটা ঠিক করে নিন।</strong> লালাখাল বিখ্যাত তার স্বচ্ছ নীলচে-সবুজ পানির জন্য, আর সেটা শুষ্ক মৌসুমের ব্যাপার। আগস্টের শেষে সারি নদী সেই একই মেঘালয়ের পলি বয়ে আনে যেটা বন্যার কারণ — অর্থাৎ পানি ঘোলা বাদামি থাকবে। তবে যা পাবেন সেটাও সত্যিই ভালো: চা বাগানের ঢাল আর খাসিয়া পাহাড়ের মাঝ দিয়ে চওড়া নদীতে শান্ত একটা ঘণ্টা, আর এই ভ্রমণের সব গন্তব্যের মধ্যে এখানকার স্রোতই সবচেয়ে কম বিপজ্জনক। রঙের জন্য নয়, নৌকা-ভ্রমণ আর দৃশ্যের জন্য যান।</small></p></li>
+        <small data-t="bn"><strong>যাওয়ার আগেই গ্রুপের প্রত্যাশাটা ঠিক করে নিন।</strong> লালাখাল বিখ্যাত তার স্বচ্ছ নীলচে-সবুজ পানির জন্য, আর সেটা শুষ্ক মৌসুমের ব্যাপার। আগস্টের শেষে সারি নদী সেই একই মেঘালয়ের পলি বয়ে আনে যেটা বন্যার কারণ — অর্থাৎ পানি ঘোলা বাদামি থাকবে। তবে যা পাবেন সেটাও সত্যিই ভালো: চা বাগানের ঢাল আর খাসিয়া পাহাড়ের মাঝ দিয়ে চওড়া নদীতে শান্ত একটা ঘণ্টা, আর এই ভ্রমণের সব গন্তব্যের মধ্যে এখানকার স্রোতই সবচেয়ে কম বিপজ্জনক। রঙের জন্য নয়, নৌকা-ভ্রমণ আর দৃশ্যের জন্য যান।</small></p></li>
       <li><time>16:00</time><p class="what">
         <b data-t="en">Start back to Sylhet</b><b data-t="bn">সিলেটের পথে ফেরা</b>
         <small data-t="en">Roughly 1.5 hours. If the group would rather skip Lalakhal after hearing the above, you are back at the hotel by 16:30 instead — no loss, and Day 3 is the long one anyway.</small>
-        <small data-t="bn">প্রায় দেড় ঘণ্টা। উপরের কথাগুলো শুনে দল যদি লালাখাল বাদ দিতে চায়, তাহলে বিকেল ৪:৩০-এর মধ্যেই হোটেলে ফেরা যাবে — ক্ষতি নেই, আর ৩য় দিনটাই তো আসল লম্বা দিন।</small></p></li>
+        <small data-t="bn">প্রায় দেড় ঘণ্টা। উপরের কথাগুলো শুনে গ্রুপ যদি লালাখাল বাদ দিতে চায়, তাহলে বিকেল ৪:৩০-এর মধ্যেই হোটেলে ফেরা যাবে — ক্ষতি নেই, আর ৩য় দিনটাই তো আসল লম্বা দিন।</small></p></li>
       <li><time>17:30</time><p class="what">
         <b data-t="en">Back at the hotel</b><b data-t="bn">হোটেলে ফেরা</b>
         <small data-t="en">Long day. Nothing scheduled after this — and tomorrow starts early.</small>
@@ -573,7 +650,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   </article>
 
   <!-- ---- DAY 3: THE CHOICE ---- -->
-  <h3 style="margin-top:44px"><span data-t="en">Day 3 — pick one of these two. You cannot do both.</span><span data-t="bn">৩য় দিন — এই দুইটার একটা বেছে নিন। দুইটাই করা যাবে না।</span></h3>
+  <h3 id="day3" style="margin-top:44px"><span data-t="en">Day 3 — pick one of these two. You cannot do both.</span><span data-t="bn">৩য় দিন — এই দুইটার একটা বেছে নিন। দুইটাই করা যাবে না।</span></h3>
   <p class="note" style="margin-bottom:22px"><span data-t="en">Both are a full day, both use the same microbus and the same 06:30 start, and both put you back at the hotel around 17:30. What actually differs is how long the children sit in a boat, how bad the approach road gets, and which of the two sights is worth seeing in late August.</span><span data-t="bn">দুইটাই পুরো একটা দিন, দুইটাতেই একই মাইক্রোবাস আর সকাল ৬:৩০-এ শুরু, আর দুইটাতেই হোটেলে ফেরা বিকেল সাড়ে ৫টার দিকে। আসল পার্থক্য তিনটা জায়গায়: বাচ্চারা কতক্ষণ নৌকায় বসে থাকবে, রাস্তা কতটা খারাপ, আর আগস্টের শেষে কোন জায়গাটা আসলে দেখার মতো থাকে।</span></p>
 
   <div class="tbl-scroll">
@@ -621,26 +698,12 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   </table>
   </div>
 
-  <div class="panel panel--jade" style="margin-top:22px">
-    <span class="tag"><span data-t="en">My recommendation</span><span data-t="bn">আমার পরামর্শ</span></span>
-    <p data-t="en"><strong>Take Option A.</strong> Two reasons, and the second one is the one most plans have not caught up with.</p>
-    <p data-t="bn"><strong>অপশন A নিন।</strong> দুইটা কারণ, আর দ্বিতীয়টা এখনো বেশিরভাগ প্ল্যানেই আসেনি।</p>
-    <p data-t="en"><strong>One:</strong> Pangthumai is the one stop in this region that is better in late August than at any other time of year — it is a waterfall, and the monsoon is what makes it run.</p>
-    <p data-t="bn"><strong>এক:</strong> এই অঞ্চলে পান্থুমাই একমাত্র জায়গা, যেটা আগস্টের শেষে বছরের অন্য যেকোনো সময়ের চেয়ে ভালো থাকে — এটা ঝর্ণা, আর বর্ষাতেই এতে পানি সবচেয়ে বেশি।</p>
-    <p data-t="en"><strong>Two: Sada Pathor is not the place in the photographs any more, and this happened four months ago.</strong> Sylhet's quarries have been looted since August 2024, but Sada Pathor was largely spared until <strong>23 April 2026</strong>. Reporting says roughly <strong>80% of the site's stone went in about a week</strong>. National coverage described what was left as a sandbar. Since then: some two thousand people sued, the Sylhet DC withdrawn, an interministerial probe, High Court orders to list the looters and put the stone back, and joint forces posted round the clock. Around <strong>26 lakh cubic feet has been recovered and 11 lakh put back</strong> — against roughly 1.80 crore cubic feet that was there to begin with. Tourists are returning in large numbers, and reporting from the site says broken rock now juts out where people used to walk barefoot.</p>
-    <p data-t="bn"><strong>দুই: ছবিতে যে সাদাপাথর দেখেন সেটা আর নেই, আর এটা হয়েছে মাত্র চার মাস আগে।</strong> ২০২৪-এর আগস্ট থেকেই সিলেটের কোয়ারিগুলোতে লুট চলছে, তবে সাদাপাথর মোটামুটি বেঁচে ছিল <strong>২৩ এপ্রিল ২০২৬</strong> পর্যন্ত। রিপোর্ট বলছে, <strong>এক সপ্তাহের মধ্যেই জায়গাটার প্রায় ৮০ শতাংশ পাথর চলে যায়</strong>। জাতীয় সংবাদমাধ্যমের বর্ণনায় যা পড়ে ছিল সেটা একটা বালুচর। এরপর: প্রায় দুই হাজার মানুষের নামে মামলা, সিলেটের ডিসি প্রত্যাহার, আন্তঃমন্ত্রণালয় তদন্ত কমিটি, লুটেরাদের তালিকা আর পাথর ফিরিয়ে দেওয়ার ব্যাপারে হাইকোর্টের নির্দেশ, আর ২৪ ঘণ্টা যৌথ বাহিনীর পাহারা। এ পর্যন্ত <strong>প্রায় ২৬ লাখ ঘনফুট উদ্ধার হয়েছে, ফিরিয়ে বসানো হয়েছে ১১ লাখ</strong> — যেখানে শুরুতে ছিল প্রায় ১ কোটি ৮০ লাখ ঘনফুট। পর্যটক কিন্তু ঠিকই যাচ্ছে, অনেক; আর মাঠপর্যায়ের রিপোর্ট বলছে, যেখানে মানুষ খালি পায়ে হাঁটত সেখানে এখন ভাঙা পাথর বেরিয়ে আছে।</p>
-    <p data-t="en"><strong>Switch to Option B if either of these is true on the morning:</strong> the group decides four hours in a boat with a 2-year-old is too much — Option B roughly halves that and cuts about 40 minutes off the drive each way; or Hadarpar will not run the combined route, which happens in high water. If you do switch, <strong>go for Utma Chora</strong> and treat Sada Pathor as the boat ride that gets you there. Framed that way it is a good day.</p>
-    <p data-t="bn"><strong>যেদিন সকালে এই দুইটার একটাও সত্যি হবে, সেদিন অপশন B নিন:</strong> গ্রুপ যদি ঠিক করে দুই বছরের বাচ্চা নিয়ে চার ঘণ্টা নৌকায় থাকা বেশি হয়ে যাচ্ছে — অপশন B-তে সেটা প্রায় অর্ধেক, আর যাওয়া-আসার রাস্তাও প্রতি দিকে ৪০ মিনিট কম; অথবা হাদারপারে যদি দুই জায়গা একসঙ্গে যাওয়ার নৌকা না পাওয়া যায়, যেটা পানি বেশি থাকলে হয়। সুইচ করলে <strong>মূল লক্ষ্য রাখুন উৎমাছড়া</strong>, আর সাদাপাথরকে ধরুন সেখানে পৌঁছানোর নৌকা-ভ্রমণ হিসেবে। এভাবে দেখলে দিনটা ভালোই।</p>
-    <p data-t="en"><strong>Do not switch blind.</strong> Have the front desk confirm Volaganj is open before you commit to it — see the checklist in section 09. And note that the two options hedge each other: Gowainghat and Companiganj are different upazilas on different rivers, so they do not always shut on the same day.</p>
-    <p data-t="bn"><strong>না জেনে সুইচ করবেন না।</strong> ঠিক করার আগে রিসেপশন থেকে কনফার্ম করান যে ভোলাগঞ্জ খোলা আছে — ০৯ নম্বর অংশের চেকলিস্ট দেখুন। আর একটা কথা: অপশন দুইটা একে অপরের ব্যাকআপও বটে — গোয়াইনঘাট আর কোম্পানীগঞ্জ আলাদা উপজেলা, আলাদা নদী, তাই দুই জায়গা সবসময় একই দিনে বন্ধ হয় না।</p>
-  </div>
-
   <!-- DAY 3 · OPTION A -->
-  <article class="day day--water">
+  <article class="day day--water" id="day3a">
     <div class="day__head">
       <span class="day__id"><span data-t="en">Day 3 · Monday 24 August</span><span data-t="bn">৩য় দিন · সোমবার ২৪ আগস্ট</span></span>
       <span class="chips">
-        <span class="chip chip--opt"><span data-t="en">Option A · recommended</span><span data-t="bn">অপশন A · সুপারিশ করা</span></span>
+        <span class="chip chip--opt"><span data-t="en">Option A · default</span><span data-t="bn">অপশন A · ডিফল্ট</span></span>
         <span class="chip chip--water"><span data-t="en">Water-dependent</span><span data-t="bn">পানির উপর নির্ভরশীল</span></span>
       </span>
       <h3 class="day__title"><span data-t="en">Pangthumai and Bichanakandi — one long boat loop</span><span data-t="bn">পান্থুমাই আর বিছনাকান্দি — একটাই লম্বা নৌপথ</span></h3>
@@ -679,7 +742,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
         <small data-t="en">Change the children into dry clothes before they get in the bus, not after. Everyone will be tired, sunburnt and happy.</small>
         <small data-t="bn">বাচ্চাদের শুকনো কাপড় গাড়িতে ওঠার আগেই পরিয়ে দিন, পরে নয়। সবাই ক্লান্ত, রোদে পোড়া আর খুশি থাকবে।</small></p></li>
       <li><time>19:00</time><p class="what">
-        <b data-t="en">Hotel. Dinner. Pack tonight.</b><b data-t="bn">হোটেল। রাতের খাবার। আজ রাতেই গোছগাছ।</b>
+        <b data-t="en">Hotel. Dinner. Pack tonight.</b><b data-t="bn">হোটেল। রাতের খাবার। আজ রাতেই প্যাকিং।</b>
         <small data-t="en">Tomorrow is a flight day and nobody wants to be folding wet clothes at 11:00 AM.</small>
         <small data-t="bn">কাল ফ্লাইটের দিন, আর সকাল ১১টায় কেউ ভেজা কাপড় ভাঁজ করতে চাইবে না।</small></p></li>
     </ul>
@@ -697,7 +760,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   </article>
 
   <!-- DAY 3 · OPTION B -->
-  <article class="day day--water">
+  <article class="day day--water" id="day3b">
     <div class="day__head">
       <span class="day__id"><span data-t="en">Day 3 · Monday 24 August · alternative</span><span data-t="bn">৩য় দিন · সোমবার ২৪ আগস্ট · বিকল্প</span></span>
       <span class="chips">
@@ -713,8 +776,8 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
         <small data-t="bn">প্রথমটা: ভোলাগঞ্জ খোলা আছে কি না, পর্যটকবাহী নৌকা চলছে কি না। দ্বিতীয়টা: দয়ারবাজারের অংশটা চালু আছে কি না — পানি বেশি থাকলে মাঝিরা সবসময় ওদিকে যান না, আর উৎমাছড়ায় যাওয়ার একমাত্র পথ ওটাই। দুইটাই জিজ্ঞেস করুন, কারণ উত্তর আলাদা হতে পারে।</small></p></li>
       <li class="is-key"><time>07:30</time><p class="what">
         <b data-t="en">Depart for Volaganj</b><b data-t="bn">ভোলাগঞ্জের উদ্দেশে রওনা</b>
-        <small data-t="en">About 35–40&nbsp;km via Salutikor, 1.5–2 hours in the wet. Shorter and smoother than the Hadarpar run, which is the main practical argument for this option. <strong>A weekday helps you here:</strong> on a clear day this site takes five to seven thousand visitors, and close to nine thousand on a Friday. Monday is the right day to come.</small>
-        <small data-t="bn">সালুটিকর হয়ে প্রায় ৩৫–৪০ কিলোমিটার, ভেজা রাস্তায় ১.৫–২ ঘণ্টা। হাদারপারের পথের চেয়ে কম আর ভালো — এই অপশনের মূল সুবিধাটাই এটা। <strong>কর্মদিবস হওয়াটা এখানে কাজে লাগবে:</strong> রোদ থাকলে এখানে দিনে পাঁচ থেকে সাত হাজার দর্শনার্থী হয়, শুক্রবারে প্রায় নয় হাজার। সোমবারই আসার ঠিক দিন।</small></p></li>
+        <small data-t="en">About 35–40&nbsp;km via Salutikor, 1.5–2 hours in the wet. Shorter and smoother than the Hadarpar run. Monday helps — this site gets very crowded at weekends.</small>
+        <small data-t="bn">সালুটিকর হয়ে প্রায় ৩৫–৪০ কিলোমিটার, ভেজা রাস্তায় ১.৫–২ ঘণ্টা। হাদারপারের রাস্তার চেয়ে কম আর ভালো। সোমবার হওয়াটা সুবিধা — উইকএন্ডে এখানে প্রচণ্ড ভিড় হয়।</small></p></li>
       <li class="is-key"><time>09:15</time><p class="what">
         <b data-t="en">Volaganj 10 no. ghat — hire one boat for the whole day</b><b data-t="bn">ভোলাগঞ্জ ১০ নম্বর ঘাট — সারাদিনের জন্য একটাই নৌকা ঠিক করুন</b>
         <small data-t="en"><strong>The ghat is not optional.</strong> A 6 June 2026 directive requires tourists to reach Sada Pathor from Volaganj 10 no. boat ghat and <strong>bans the road route via Kalairag along the India border</strong> outright. If a driver offers to save you the boat fare by road, the answer is no.</small>
@@ -732,7 +795,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
       <li><time>11:15</time><p class="what">
         <b data-t="en">The boat drops you at Doyar Bazar</b><b data-t="bn">নৌকা আপনাদের দয়ারবাজারে নামাবে</b>
         <small data-t="en">Confirm the pickup time with the boatman out loud, in front of the group, before you walk off the ghat.</small>
-        <small data-t="bn">ঘাট ছেড়ে যাওয়ার আগে মাঝির সঙ্গে ফেরার সময়টা দলের সবার সামনে স্পষ্ট করে বলে নিন।</small></p></li>
+        <small data-t="bn">ঘাট ছেড়ে যাওয়ার আগে মাঝির সঙ্গে ফেরার সময়টা গ্রুপের সবার সামনে স্পষ্ট করে বলে নিন।</small></p></li>
       <li class="is-key"><time>11:45</time><p class="what">
         <b data-t="en">Utma Chora — the reason to take this option</b><b data-t="bn">উৎমাছড়া — এই অপশন নেওয়ার আসল কারণ</b>
         <small data-t="en">CNG autos or bikes from Doyar Bazar to Chorar Bazar, then a <strong>10–15 minute walk</strong> to the water. A stone-bed stream running out of the Meghalaya hills in Uttar Ranikhai, far quieter than Bichanakandi and untouched by what happened at Sada Pathor. This is the intact sight of the two, which is why it is worth the transfers.</small>
@@ -749,8 +812,8 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
         <small data-t="bn">মাঝি না থাকলে আগেই ঠিক করা মোট ভাড়া আর নির্দিষ্ট সময়টাই তখন কাজে লাগে।</small></p></li>
       <li><time>15:00</time><p class="what">
         <b data-t="en">The old ropeway at Volaganj</b><b data-t="bn">ভোলাগঞ্জের পুরনো রোপওয়ে</b>
-        <small data-t="en">Twenty minutes by the vehicle. The long-disused Chhatak–Volaganj ropeway carried quarry stone to the Chhatak cement works; the concrete towers and bunkers still stand and are one of the things people come to Volaganj for. It needs no boat and no weather, so it is the part of this day that holds up when nothing else does. Sources disagree on its length — treat any figure you are told as approximate.</small>
-        <small data-t="bn">গাড়ির কাছেই, বিশ মিনিট। বহুদিন ধরে বন্ধ থাকা ছাতক–ভোলাগঞ্জ রোপওয়ে দিয়ে ছাতক সিমেন্ট কারখানায় পাথর যেত; কংক্রিটের খুঁটি আর বাংকারগুলো এখনো দাঁড়িয়ে আছে, আর ভোলাগঞ্জে মানুষ এগুলো দেখতেও আসে। এতে নৌকাও লাগে না, আবহাওয়াও লাগে না — তাই সব ভেস্তে গেলেও দিনের এই অংশটা থেকে যায়। এর দৈর্ঘ্য নিয়ে সূত্রগুলো একমত নয় — কেউ কোনো সংখ্যা বললে আনুমানিক ধরে নেবেন।</small></p></li>
+        <small data-t="en">Twenty minutes by the vehicle. The long-disused Chhatak–Volaganj ropeway carried quarry stone to the Chhatak cement works; the concrete towers and bunkers still stand. No boat and no weather needed, so this part of the day holds up when nothing else does.</small>
+        <small data-t="bn">গাড়ির কাছেই, বিশ মিনিট। বহুদিন বন্ধ থাকা ছাতক–ভোলাগঞ্জ রোপওয়ে দিয়ে ছাতক সিমেন্ট কারখানায় পাথর যেত; কংক্রিটের খুঁটি আর বাংকারগুলো এখনো দাঁড়িয়ে আছে। নৌকাও লাগে না, আবহাওয়াও লাগে না — তাই সব ভেস্তে গেলেও দিনের এই অংশটা থেকে যায়।</small></p></li>
       <li><time>15:30</time><p class="what">
         <b data-t="en">Drive back</b><b data-t="bn">ফেরার পথ</b>
         <small data-t="en">Change the children into dry clothes before they get in the bus, not after.</small>
@@ -760,7 +823,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
         <small data-t="en">Slightly earlier than Option A, with roughly half the boat time.</small>
         <small data-t="bn">অপশন A-র চেয়ে একটু আগে, আর নৌকায় সময় প্রায় অর্ধেক।</small></p></li>
       <li><time>19:00</time><p class="what">
-        <b data-t="en">Dinner. Pack tonight.</b><b data-t="bn">রাতের খাবার। আজ রাতেই গোছগাছ।</b>
+        <b data-t="en">Dinner. Pack tonight.</b><b data-t="bn">রাতের খাবার। আজ রাতেই প্যাকিং।</b>
         <small data-t="en">Tomorrow is a flight day and nobody wants to be folding wet clothes at 11:00 AM.</small>
         <small data-t="bn">কাল ফ্লাইটের দিন, আর সকাল ১১টায় কেউ ভেজা কাপড় ভাঁজ করতে চাইবে না।</small></p></li>
     </ul>
@@ -768,9 +831,9 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
       <div class="fallback">
         <b><span data-t="en">Read this before you choose Option B</span><span data-t="bn">অপশন B নেওয়ার আগে এটা পড়ুন</span></b>
         <p data-t="en"><strong>If you have to shorten the day, decide by the reason.</strong> Short on time, or the group is flagging → keep Utma Chora, skip Sada Pathor; it is the one of the two that is still intact. Water running high, or the stream looks strong at Chorar Bazar → the reverse: stay in the boat, do Sada Pathor only, and be back at the hotel by 15:00.</p>
-        <p data-t="bn"><strong>দিনটা ছোট করতে হলে কারণ দেখে ঠিক করুন।</strong> সময় কম, বা দল ক্লান্ত → উৎমাছড়া রাখুন, সাদাপাথর বাদ দিন; দুইটার মধ্যে অক্ষত জায়গা ওটাই। পানি বেশি, বা চরার বাজারে গিয়ে ছড়ার স্রোত বেশি মনে হচ্ছে → উল্টোটা: নৌকাতেই থাকুন, শুধু সাদাপাথর করুন, আর বিকেল ৩টার মধ্যে হোটেলে ফিরুন।</p>
+        <p data-t="bn"><strong>দিনটা ছোট করতে হলে কারণ দেখে ঠিক করুন।</strong> সময় কম, বা গ্রুপ ক্লান্ত → উৎমাছড়া রাখুন, সাদাপাথর বাদ দিন; দুইটার মধ্যে অক্ষত জায়গা ওটাই। পানি বেশি, বা চরার বাজারে গিয়ে ছড়ার স্রোত বেশি মনে হচ্ছে → উল্টোটা: নৌকাতেই থাকুন, শুধু সাদাপাথর করুন, আর বিকেল ৩টার মধ্যে হোটেলে ফিরুন।</p>
         <p data-t="en"><strong>Turung Chora is the usual third stop. Skip it.</strong> It is another 30–40 minutes on foot from Chorar Bazar, or a bike ride. Most guides pair all three, but they are not writing for a group with a 2- and a 4-year-old in it.</p>
-        <p data-t="bn"><strong>তুরংছড়া সাধারণত তৃতীয় গন্তব্য হিসেবে যোগ করা হয়। বাদ দিন।</strong> চরার বাজার থেকে আরও ৩০–৪০ মিনিট হাঁটা, নয়তো বাইক। বেশিরভাগ গাইডে তিনটা একসঙ্গে দেওয়া থাকে, কিন্তু সেগুলো ২ আর ৪ বছরের বাচ্চাওয়ালা দলের জন্য লেখা নয়।</p>
+        <p data-t="bn"><strong>তুরংছড়া সাধারণত তৃতীয় গন্তব্য হিসেবে যোগ করা হয়। বাদ দিন।</strong> চরার বাজার থেকে আরও ৩০–৪০ মিনিট হাঁটা, নয়তো বাইক। বেশিরভাগ গাইডে তিনটা একসঙ্গে দেওয়া থাকে, কিন্তু সেগুলো ২ আর ৪ বছরের বাচ্চাওয়ালা গ্রুপের জন্য লেখা নয়।</p>
         <p data-t="en"><strong>If Volaganj is closed:</strong> this is the likelier of the two options to be shut, so get the answer before the vehicle moves. Check Hadarpar before giving up on the day — it is a different upazila on a different river, and Option A may still be running. If both are down, go city-side: Malnicherra and Lakkatura tea gardens, Shahi Eidgah at sunset, Monipuri handicrafts at Lamabazar.</p>
         <p data-t="bn"><strong>ভোলাগঞ্জ বন্ধ থাকলে:</strong> দুইটা অপশনের মধ্যে এটারই বন্ধ থাকার সম্ভাবনা বেশি, তাই গাড়ি ছাড়ার আগেই খবরটা নিন। দিনটা বাদ দেওয়ার আগে হাদারপারের খোঁজ নিন — ওটা আলাদা উপজেলা, আলাদা নদী, অপশন A তখনো চালু থাকতে পারে। দুইটাই বন্ধ থাকলে শহরের দিকেই থাকুন: মালনীছড়া ও লাক্কাতুরা চা বাগান, গোধূলিতে শাহী ঈদগাহ, লামাবাজারে মণিপুরি হস্তশিল্প।</p>
       </div>
@@ -778,7 +841,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   </article>
 
   <!-- DAY 4 -->
-  <article class="day">
+  <article class="day" id="day4">
     <div class="day__head">
       <span class="day__id"><span data-t="en">Day 4 · Tuesday 25 August</span><span data-t="bn">৪র্থ দিন · মঙ্গলবার ২৫ আগস্ট</span></span>
       <span class="chip chip--dry"><span data-t="en">Rain-proof</span><span data-t="bn">বৃষ্টিতেও নিরাপদ</span></span>
@@ -806,7 +869,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
       <li><time>12:45</time><p class="what">
         <b data-t="en">Arrive airport</b><b data-t="bn">বিমানবন্দরে পৌঁছানো</b>
         <small data-t="en">Domestic check-in typically closes 45 minutes before departure, so around 13:45 for this flight. Confirm the exact cutoff with your airline this week, not on the day.</small>
-        <small data-t="bn">অভ্যন্তরীণ ফ্লাইটের চেক-ইন সাধারণত ছাড়ার ৪৫ মিনিট আগে বন্ধ হয়, অর্থাৎ এই ফ্লাইটের ক্ষেত্রে বেলা ১:৪৫-এর দিকে। সঠিক সময়টা এয়ারলাইনের কাছ থেকে এই সপ্তাহেই জেনে নিন, ওইদিন নয়।</small></p></li>
+        <small data-t="bn">ডোমেস্টিক ফ্লাইটের চেক-ইন সাধারণত ছাড়ার ৪৫ মিনিট আগে বন্ধ হয়, অর্থাৎ এই ফ্লাইটের ক্ষেত্রে বেলা ১:৪৫-এর দিকে। সঠিক সময়টা এয়ারলাইনের কাছ থেকে এই সপ্তাহেই জেনে নিন, ওইদিন নয়।</small></p></li>
       <li class="is-key"><time>14:30</time><p class="what"><b data-t="en">Flight departs</b><b data-t="bn">ফ্লাইট ছাড়া</b></p></li>
     </ul>
     <div class="fallback-wrap">
@@ -820,9 +883,9 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
 </section>
 
 <!-- ================= 04 ================= -->
-<section>
-  <h2><span class="num" data-t="en">04</span><span class="num" data-t="bn">০৪</span><span data-t="en">Food</span><span data-t="bn">খাওয়া</span></h2>
-  <p class="sub"><span data-t="en">Sylheti cooking is bhorta-forward and heavily spiced. Plan around that for the children.</span><span data-t="bn">সিলেটি রান্না ভর্তা-প্রধান আর ঝাল অনেক বেশি। বাচ্চাদের কথা মাথায় রেখে সেভাবেই পরিকল্পনা করুন।</span></p>
+<section id="s04">
+  <h2><span class="num" data-t="en">04</span><span class="num" data-t="bn">০৪</span><span data-t="en">Food</span><span data-t="bn">খাবার</span></h2>
+  <p class="sub"><span data-t="en">Sylheti cooking is bhorta-forward and heavily spiced. Plan around that for the children.</span><span data-t="bn">সিলেটি রান্না ভর্তা-প্রধান আর ঝাল অনেক বেশি। বাচ্চাদের কথা মাথায় রেখে সেভাবেই প্ল্যান করুন।</span></p>
 
   <div class="grid2">
     <div>
@@ -848,7 +911,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
         <li><span data-t="en"><strong>Pach Bhai</strong>, Zindabazar — same style, nearly the same quality, usually less of a scrum.</span>
           <span data-t="bn"><strong>পাঁচভাই</strong>, জিন্দাবাজার — একই ধরনের, প্রায় একই মানের, ভিড় সাধারণত কম।</span></li>
         <li><span data-t="en"><strong>Palki</strong>, Zindabazar — calmer, better for a sit-down group meal.</span>
-          <span data-t="bn"><strong>পালকি</strong>, জিন্দাবাজার — শান্ত পরিবেশ, দল বেঁধে বসে খাওয়ার জন্য ভালো।</span></li>
+          <span data-t="bn"><strong>পালকি</strong>, জিন্দাবাজার — শান্ত পরিবেশ, সবাই একসঙ্গে বসে খাওয়ার জন্য ভালো।</span></li>
         <li><span data-t="en"><strong>Woondaal King Kebab</strong> — grills and kebabs. Easiest option for the children.</span>
           <span data-t="bn"><strong>উন্ডাল কিং কাবাব</strong> — গ্রিল আর কাবাব। বাচ্চাদের জন্য সবচেয়ে সহজ।</span></li>
         <li><span data-t="en"><strong>The hotel restaurant</strong> — the safe default for late arrivals and toddler dinners.</span>
@@ -867,7 +930,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
 </section>
 
 <!-- ================= 05 ================= -->
-<section>
+<section id="s05">
   <h2><span class="num" data-t="en">05</span><span class="num" data-t="bn">০৫</span><span data-t="en">What late August actually looks like</span><span data-t="bn">আগস্টের শেষটা আসলে কেমন</span></h2>
   <p class="sub"><span data-t="en">Roughly 30–33&nbsp;°C, high humidity, and heavy rain in bursts on most days. Sunshine between the bursts.</span><span data-t="bn">মোটামুটি ৩০–৩৩ ডিগ্রি সেলসিয়াস, আর্দ্রতা বেশি, আর প্রায় প্রতিদিনই থেমে থেমে ভারী বৃষ্টি। বৃষ্টির ফাঁকে ফাঁকে রোদ।</span></p>
   <p data-t="en">The thing to understand is the mechanism. Sylhet's flooding is driven by the Meghalaya hills across the border, not by local rainfall. Water arrives in the Surma, Kushiyara and Piyain hours after it falls somewhere you cannot see. That is why a bright morning at Dargah Gate tells you nothing about whether the boats are running at Hadarpar.</p>
@@ -877,14 +940,14 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
     <li><span data-t="en"><strong>FFWC daily bulletin</strong> — <a href="https://ffwc.gov.bd">ffwc.gov.bd</a>. River levels against danger marks, updated daily.</span>
       <span data-t="bn"><strong>এফএফডব্লিউসির দৈনিক বুলেটিন</strong> — <a href="https://ffwc.gov.bd">ffwc.gov.bd</a>। বিপৎসীমার সাপেক্ষে নদীর পানির উচ্চতা, প্রতিদিন হালনাগাদ করা হয়।</span></li>
     <li><span data-t="en"><strong>Rain overnight?</strong> — if it rained hard through the night, assume the boats are doubtful and have the fallback plan ready before breakfast, not in the car park.</span>
-      <span data-t="bn"><strong>রাতে বৃষ্টি হয়েছে?</strong> — সারা রাত ভারী বৃষ্টি হলে ধরে নিন নৌকা অনিশ্চিত, আর বিকল্প পরিকল্পনা নাশতার আগেই হাতে রাখুন, গাড়ির কাছে গিয়ে নয়।</span></li>
+      <span data-t="bn"><strong>রাতে বৃষ্টি হয়েছে?</strong> — সারা রাত ভারী বৃষ্টি হলে ধরে নিন নৌকা অনিশ্চিত, আর ব্যাকআপ প্ল্যান নাশতার আগেই হাতে রাখুন, গাড়ির কাছে গিয়ে নয়।</span></li>
   </ul>
 </section>
 
 <!-- ================= 06 ================= -->
-<section>
+<section id="s06">
   <h2><span class="num" data-t="en">06</span><span class="num" data-t="bn">০৬</span><span data-t="en">Safety</span><span data-t="bn">নিরাপত্তা</span></h2>
-  <p class="sub"><span data-t="en">Everything here is written for a group with a two-year-old in it. Go through the boat rules with everyone before Day 2.</span><span data-t="bn">এখানকার সবকিছুই এমন একটা দলের জন্য লেখা যাদের সঙ্গে দুই বছরের একটা শিশু আছে। ২য় দিনের আগে নৌকার নিয়মগুলো সবার সঙ্গে একবার দেখে নিন।</span></p>
+  <p class="sub"><span data-t="en">Everything here is written for a group with a two-year-old in it. Go through the boat rules with everyone before Day 2.</span><span data-t="bn">এখানকার সবকিছুই এমন একটা গ্রুপের জন্য লেখা যাদের সঙ্গে দুই বছরের একটা বাচ্চা আছে। ২য় দিনের আগে নৌকার নিয়মগুলো সবার সঙ্গে একবার দেখে নিন।</span></p>
 
   <div class="panel panel--alert">
     <span class="tag"><span data-t="en">On the water</span><span data-t="bn">পানিতে</span></span>
@@ -892,13 +955,13 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
       <li><span data-t="en"><strong>Life jacket on every person</strong>, adults included. If the boat has none, take a different boat.</span>
         <span data-t="bn"><strong>প্রত্যেকের গায়ে লাইফ জ্যাকেট</strong>, বড়দেরও। নৌকায় লাইফ জ্যাকেট না থাকলে অন্য নৌকা নিন।</span></li>
       <li><span data-t="en"><strong>One adult assigned to each child</strong>, holding, for the entire ride. Assign it by name at the hotel, not at the ghat.</span>
-        <span data-t="bn"><strong>প্রতিটি শিশুর জন্য একজন নির্দিষ্ট বড় মানুষ</strong>, পুরো সময় ধরে রাখবেন। কাজটা হোটেলেই নাম ধরে ভাগ করে নিন, ঘাটে গিয়ে নয়।</span></li>
+        <span data-t="bn"><strong>প্রতিটি বাচ্চার জন্য একজন নির্দিষ্ট বড় মানুষ</strong>, পুরো সময় ধরে রাখবেন। কাজটা হোটেলেই নাম ধরে ভাগ করে নিন, ঘাটে গিয়ে নয়।</span></li>
       <li><span data-t="en"><strong>Don't board an overloaded boat.</strong> Two smaller boats are better than one full one.</span>
         <span data-t="bn"><strong>অতিরিক্ত যাত্রীবোঝাই নৌকায় উঠবেন না।</strong> একটা ভর্তি নৌকার চেয়ে দুইটা ছোট নৌকা ভালো।</span></li>
       <li><span data-t="en"><strong>Nobody enters the water</strong> at Jaflong, Bichanakandi or Sada Pathor in August. The current is strong and you can't see the bottom.</span>
         <span data-t="bn"><strong>আগস্টে জাফলং, বিছনাকান্দি বা সাদাপাথরে কেউ পানিতে নামবেন না।</strong> স্রোত প্রবল আর নিচে কী আছে দেখা যায় না।</span></li>
       <li><span data-t="en"><strong>Fix the total fare before boarding</strong>, in front of the group, so there is no argument mid-river.</span>
-        <span data-t="bn"><strong>ওঠার আগেই মোট ভাড়া ঠিক করে নিন</strong>, দলের সবার সামনে, যাতে নদীর মাঝখানে কোনো তর্ক না বাধে।</span></li>
+        <span data-t="bn"><strong>ওঠার আগেই মোট ভাড়া ঠিক করে নিন</strong>, গ্রুপের সবার সামনে, যাতে নদীর মাঝখানে কোনো তর্ক না বাধে।</span></li>
       <li><span data-t="en"><strong>No standing, no swapping seats</strong> once the boat is moving.</span>
         <span data-t="bn"><strong>নৌকা চলা অবস্থায় দাঁড়ানো বা সিট বদল নয়।</strong></span></li>
     </ul>
@@ -924,16 +987,16 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
       </ul>
     </div>
     <div>
-      <h3><span data-t="en">Health &amp; kit</span><span data-t="bn">স্বাস্থ্য ও সরঞ্জাম</span></h3>
+      <h3><span data-t="en">Health &amp; kit</span><span data-t="bn">ওষুধ ও জরুরি কিট</span></h3>
       <ul class="plain">
         <li><span data-t="en">ORS sachets, paracetamol in <strong>both adult and paediatric doses</strong>, antihistamine, antiseptic, plasters, mosquito repellent.</span>
-          <span data-t="bn">খাবার স্যালাইন, <strong>বড় ও শিশু — দুই মাত্রার</strong> প্যারাসিটামল, অ্যান্টিহিস্টামিন, অ্যান্টিসেপটিক, ব্যান্ডেজ, মশা তাড়ানোর ক্রিম।</span></li>
+          <span data-t="bn">খাবার স্যালাইন, <strong>বড় ও বাচ্চা — দুই মাত্রার</strong> প্যারাসিটামল, অ্যান্টিহিস্টামিন, অ্যান্টিসেপটিক, ব্যান্ডেজ, মশা তাড়ানোর ক্রিম।</span></li>
         <li><span data-t="en">Nearest hospital: <strong>Sylhet MAG Osmani Medical College Hospital</strong>. Private: Mount Adora, Ibn Sina Sylhet.</span>
           <span data-t="bn">নিকটতম হাসপাতাল: <strong>সিলেট এম এ জি ওসমানী মেডিকেল কলেজ হাসপাতাল</strong>। বেসরকারি: মাউন্ট এডোরা, ইবনে সিনা সিলেট।</span></li>
         <li><span data-t="en">National emergency: <strong>999</strong>. Tourist Police operate at Jaflong.</span>
           <span data-t="bn">জাতীয় জরুরি সেবা: <strong>৯৯৯</strong>। জাফলংয়ে ট্যুরিস্ট পুলিশ আছে।</span></li>
       </ul>
-      <h3><span data-t="en">Logistics</span><span data-t="bn">ব্যবস্থাপনা</span></h3>
+      <h3><span data-t="en">Logistics</span><span data-t="bn">লজিস্টিকস</span></h3>
       <ul class="plain">
         <li><span data-t="en">Mobile signal drops toward Bichanakandi and Volaganj. Share live location before you lose it, and agree a meeting point at each ghat.</span>
           <span data-t="bn">বিছনাকান্দি আর ভোলাগঞ্জের দিকে মোবাইল নেটওয়ার্ক দুর্বল হয়ে আসে। সিগন্যাল থাকতেই লাইভ লোকেশন শেয়ার করুন, আর প্রতিটি ঘাটে মিলিত হওয়ার একটা জায়গা ঠিক করে নিন।</span></li>
@@ -947,8 +1010,8 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
 </section>
 
 <!-- ================= 07 ================= -->
-<section>
-  <h2><span class="num" data-t="en">07</span><span class="num" data-t="bn">০৭</span><span data-t="en">Packing, kept short</span><span data-t="bn">গোছগাছ, সংক্ষেপে</span></h2>
+<section id="s07">
+  <h2><span class="num" data-t="en">07</span><span class="num" data-t="bn">০৭</span><span data-t="en">Packing, kept short</span><span data-t="bn">প্যাকিং, সংক্ষেপে</span></h2>
   <div class="grid2">
     <div>
       <ul class="plain">
@@ -976,9 +1039,9 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
 </section>
 
 <!-- ================= 08 ================= -->
-<section>
+<section id="s08">
   <h2><span class="num" data-t="en">08</span><span class="num" data-t="bn">০৮</span><span data-t="en">Cost estimate</span><span data-t="bn">খরচের হিসাব</span></h2>
-  <p class="sub"><span data-t="en">For the whole group of 10, excluding hotel and the already-booked flights. Three columns because monsoon pricing is not a single number.</span><span data-t="bn">পুরো ১০ জনের দলের জন্য, হোটেল আর আগে থেকে বুক করা ফ্লাইট বাদে। তিনটি কলাম, কারণ বর্ষার দামটা কোনো একটা নির্দিষ্ট সংখ্যা নয়।</span></p>
+  <p class="sub"><span data-t="en">For the whole group of 10, excluding hotel and the already-booked flights. Three columns because monsoon pricing is not a single number.</span><span data-t="bn">পুরো ১০ জনের গ্রুপের জন্য, হোটেল আর আগে থেকে বুক করা ফ্লাইট বাদে। তিনটি কলাম, কারণ বর্ষার দামটা কোনো একটা নির্দিষ্ট সংখ্যা নয়।</span></p>
 
   <div class="tbl-scroll">
   <table class="tbl">
@@ -990,7 +1053,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
     </tr>
     <tr>
       <td><span data-t="en">Train, Dhaka → Sylhet<br><span class="src">8 adults + 1 half fare · Shovan Chair vs Snigdha</span></span>
-        <span data-t="bn">ট্রেন, ঢাকা → সিলেট<br><span class="src">৮ জন প্রাপ্তবয়স্ক + ১টি অর্ধেক ভাড়া · শোভন চেয়ার বনাম স্নিগ্ধা</span></span></td>
+        <span data-t="bn">ট্রেন, ঢাকা → সিলেট<br><span class="src">৮ জন অ্যাডাল্ট + ১টি অর্ধেক ভাড়া · শোভন চেয়ার বনাম স্নিগ্ধা</span></span></td>
       <td class="amt">3,800</td><td class="amt">7,600</td><td class="amt">9,000</td></tr>
     <tr>
       <td><span data-t="en">Microbus, 3 hires + 2 CNG<br><span class="src">Jaflong · the Day 3 option · airport</span></span>
@@ -1012,29 +1075,29 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
         <span data-t="bn">বর্ষার আপৎকালীন খরচ (১০%)<br><span class="src">নৌকা বাতিল হলেও গাড়ির ভাড়া কিন্তু দিতেই হবে</span></span></td>
       <td class="amt">4,500</td><td class="amt">5,800</td><td class="amt">6,900</td></tr>
     <tr class="total">
-      <td><span data-t="en">Group total</span><span data-t="bn">দলের মোট</span></td>
+      <td><span data-t="en">Group total</span><span data-t="bn">গ্রুপের মোট</span></td>
       <td class="amt">49,800</td><td class="amt">63,900</td><td class="amt">75,900</td></tr>
     <tr class="total" style="border-top:0">
-      <td style="border-top:0"><span data-t="en">Per couple</span><span data-t="bn">প্রতি দম্পতি</span></td>
+      <td style="border-top:0"><span data-t="en">Per family</span><span data-t="bn">প্রতি ফ্যামিলি</span></td>
       <td class="amt" style="border-top:0">≈ 12,500</td><td class="amt" style="border-top:0">≈ 16,000</td><td class="amt" style="border-top:0">≈ 19,000</td></tr>
   </table>
   </div>
 
   <div class="panel panel--silt" style="margin-top:26px">
     <span class="tag"><span data-t="en">How much to trust these</span><span data-t="bn">এই হিসাব কতটা বিশ্বাসযোগ্য</span></span>
-    <p data-t="en"><strong>Train fares:</strong> published figures disagree badly. One 2026 source lists Shovan Chair at BDT 400–500 and Snigdha at 800–1,000; another gives the route range as 265 up to 1,678 for AC Berth; an older listing puts Snigdha at 610. I have used the mid-to-upper band. The only number that counts is the one on <a href="https://eticket.railway.gov.bd">eticket.railway.gov.bd</a>.</p>
-    <p data-t="bn"><strong>ট্রেনের ভাড়া:</strong> প্রকাশিত তথ্যে মারাত্মক গরমিল আছে। ২০২৬ সালের একটি সূত্র শোভন চেয়ার ৪০০–৫০০ টাকা আর স্নিগ্ধা ৮০০–১,০০০ টাকা বলছে; আরেকটি এই রুটের পরিসর দিচ্ছে ২৬৫ থেকে এসি বার্থে ১,৬৭৮ টাকা পর্যন্ত; পুরনো একটি তালিকায় স্নিগ্ধা ৬১০ টাকা। আমি মাঝারি থেকে উপরের ধাপটা ধরেছি। আসল সংখ্যাটা শুধু <a href="https://eticket.railway.gov.bd">eticket.railway.gov.bd</a>-এ যা দেখাবে সেটাই।</p>
+    <p data-t="en"><strong>Train fares:</strong> published figures vary widely, so the table uses the mid-to-upper band. The only number that counts is the one on <a href="https://eticket.railway.gov.bd">eticket.railway.gov.bd</a>.</p>
+    <p data-t="bn"><strong>ট্রেনের ভাড়া:</strong> প্রকাশিত ভাড়ায় অনেক গরমিল, তাই টেবিলে মাঝারি থেকে উপরের ধাপটা ধরা হয়েছে। আসল সংখ্যাটা শুধু <a href="https://eticket.railway.gov.bd">eticket.railway.gov.bd</a>-এ যা দেখাবে সেটাই।</p>
     <p data-t="en"><strong>Vehicle, boat and food figures are unverified estimates</strong> — negotiating anchors, not quotes. Monsoon rates run higher because fewer drivers take the Gowainghat road. Always fix the boat fare as a total, in front of the group, before anyone steps in.</p>
-    <p data-t="bn"><strong>গাড়ি, নৌকা আর খাবারের হিসাবগুলো যাচাই করা নয়</strong> — এগুলো দরদাম শুরু করার ভিত্তি, নির্ধারিত দর নয়। বর্ষায় ভাড়া বেশি থাকে, কারণ গোয়াইনঘাটের রাস্তায় কম ড্রাইভারই যেতে চান। নৌকার ভাড়া সবসময় পুরো দলের সামনে, কেউ ওঠার আগেই, মোট অঙ্কে ঠিক করে নেবেন।</p>
+    <p data-t="bn"><strong>গাড়ি, নৌকা আর খাবারের হিসাবগুলো যাচাই করা নয়</strong> — এগুলো দরদাম শুরু করার ভিত্তি, নির্ধারিত দর নয়। বর্ষায় ভাড়া বেশি থাকে, কারণ গোয়াইনঘাটের রাস্তায় কম ড্রাইভারই যেতে চান। নৌকার ভাড়া সবসময় পুরো গ্রুপের সামনে, কেউ ওঠার আগেই, মোট অঙ্কে ঠিক করে নেবেন।</p>
     <p data-t="en"><strong>The two Day 3 options cost about the same, so do not choose on price.</strong> For Option B, published Volaganj figures cluster at BDT 700–900 per boat for the Sada Pathor round trip, seating six to eight, with larger boats and busier days quoted up to about 1,500 — and they move with the season and the crowd, so that is an anchor rather than a rate. On top of it: the Doyar Bazar leg, the boatman's waiting time, and CNG autos or bikes from Doyar Bazar to Chorar Bazar. Against it, a shorter drive. The two roughly cancel out and the table above holds either way.</p>
     <p data-t="bn"><strong>৩য় দিনের দুইটা অপশনের খরচ প্রায় সমান, তাই দাম দেখে বাছবেন না।</strong> অপশন B-তে ভোলাগঞ্জের প্রকাশিত ভাড়া সাধারণত নৌকাপ্রতি ৭০০–৯০০ টাকা, সাদাপাথর যাওয়া-আসা মিলিয়ে, ছয় থেকে আটজনের বসার জায়গা; বড় নৌকা বা ভিড়ের দিনে প্রায় ১,৫০০ পর্যন্ত ওঠে — আর এটা মৌসুম ও ভিড় অনুযায়ী বদলায়, তাই এটা দরদামের ভিত্তি, নির্ধারিত দর নয়। এর বাইরে আলাদা: দয়ারবাজারের অংশ, মাঝির অপেক্ষার সময়, আর দয়ারবাজার থেকে চরার বাজার পর্যন্ত সিএনজি বা বাইক। এর বিপরীতে রাস্তা কম। দুইটা মোটামুটি কাটাকাটি হয়ে যায়, আর যেটাই নিন উপরের হিসাব ঠিক থাকে।</p>
-    <p data-t="en"><strong>My advice on the train class:</strong> take Snigdha. It is roughly BDT 3,500 more for the group over Shovan Chair. For a seven-hour August journey with a 2-year-old, that is the cheapest comfort you will buy on this trip.</p>
-    <p data-t="bn"><strong>ট্রেনের ক্লাস নিয়ে আমার পরামর্শ:</strong> স্নিগ্ধা নিন। শোভন চেয়ারের তুলনায় পুরো দলের জন্য বাড়তি খরচ প্রায় ৩,৫০০ টাকা। আগস্টের সাত ঘণ্টার যাত্রায়, সঙ্গে দুই বছরের একটা বাচ্চা নিয়ে — এটাই এই ভ্রমণের সবচেয়ে সস্তা আরাম।</p>
+    <p data-t="en"><strong>Train class: take Snigdha.</strong> It is roughly BDT 3,500 more for the group over Shovan Chair. For a seven-hour August journey with a 2-year-old, that is the cheapest comfort you will buy on this trip.</p>
+    <p data-t="bn"><strong>ট্রেনের ক্লাস: স্নিগ্ধা নিন।</strong> শোভন চেয়ারের তুলনায় পুরো গ্রুপের জন্য বাড়তি খরচ প্রায় ৩,৫০০ টাকা। আগস্টের সাত ঘণ্টার যাত্রায়, সঙ্গে দুই বছরের একটা বাচ্চা নিয়ে — এটাই এই ভ্রমণের সবচেয়ে সস্তা আরাম।</p>
   </div>
 </section>
 
 <!-- ================= 09 ================= -->
-<section>
+<section id="s09">
   <h2><span class="num" data-t="en">09</span><span class="num" data-t="bn">০৯</span><span data-t="en">Before you leave Dhaka</span><span data-t="bn">ঢাকা ছাড়ার আগে</span></h2>
   <table class="tbl">
     <tr><th><span data-t="en">When</span><span data-t="bn">কখন</span></th><th><span data-t="en">Do</span><span data-t="bn">কী করবেন</span></th></tr>
@@ -1043,7 +1106,7 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
         <span data-t="bn">৩ রাতের হোটেল বুকিং নিশ্চিত করুন। দুই বছরের বাচ্চার জন্য <strong>পাশাপাশি রুম</strong> আর একটা <strong>কট</strong> লিখিতভাবে চেয়ে নিন।</span></td></tr>
     <tr><td class="amt"><span data-t="en">Now</span><span data-t="bn">এখনই</span></td>
       <td><span data-t="en">Confirm the exact <strong>domestic check-in cutoff</strong> with your airline for the 2:30 PM flight.</span>
-        <span data-t="bn">দুপুর ২:৩০-এর ফ্লাইটের জন্য এয়ারলাইনের কাছ থেকে <strong>অভ্যন্তরীণ চেক-ইন বন্ধ হওয়ার সঠিক সময়</strong> জেনে নিন।</span></td></tr>
+        <span data-t="bn">দুপুর ২:৩০-এর ফ্লাইটের জন্য এয়ারলাইনের কাছ থেকে <strong>ডোমেস্টিক চেক-ইন বন্ধ হওয়ার সঠিক সময়</strong> জেনে নিন।</span></td></tr>
     <tr><td class="amt"><span data-t="en">12 Aug, 8:00 AM</span><span data-t="bn">১২ আগস্ট, সকাল ৮টা</span></td>
       <td><span data-t="en">Be logged in at <a href="https://eticket.railway.gov.bd">eticket.railway.gov.bd</a> the moment booking opens. Ten seats together on Parabat Express (709), 22 August, Snigdha class. Verify the departure time and fare on the portal itself.</span>
         <span data-t="bn">বুকিং শুরু হওয়ার মুহূর্তেই <a href="https://eticket.railway.gov.bd">eticket.railway.gov.bd</a>-এ লগইন করা থাকুন। ২২ আগস্টের পারাবত এক্সপ্রেসে (৭০৯) স্নিগ্ধা ক্লাসে একসঙ্গে ১০টি আসন। ছাড়ার সময় আর ভাড়া পোর্টাল থেকেই যাচাই করে নিন।</span></td></tr>
@@ -1063,10 +1126,10 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
 </section>
 
 <footer>
-  <p data-t="en"><strong>Sources used.</strong> Current river levels and closures: Flood Forecasting and Warning Centre bulletins as reported by Dhaka Post (26 July 2026), Rising BD and Bangla Dhaka Tribune (9 July) and Arthosuchak (13 July); the Sada Pathor closure of 21 June 2026 via Rising BD and Desh Rupantor. The combined Pangthumai–Bichanakandi boat route: Bangladesh’s official tourism portal beautifulbangladesh.gov.bd, plus Offroad Bangladesh and traveller reports. Train schedules, off days and fares: compiled from several 2026 listings that contradict one another — Bangladesh Railway’s own portal (eticket.railway.gov.bd) is the only authority. Sreepur's location and features: the Jaintapur Union Council site and Bangla Wikipedia, which agree it sits on the Sylhet–Tamabil road on the Piyain but not on its exact distance from Jaflong. The Sada Pathor looting from 23 April 2026, the 80% figure, the recovery totals (26 lakh cubic feet recovered, 11 lakh restored, against roughly 1.80 crore originally on site), the two thousand people sued, the withdrawal of the Sylhet DC, the interministerial probe and the High Court orders: The Daily Star, The Business Standard, Prothom Alo, bdnews24, New Age and BSS. Visitor numbers and the broken-rock hazard: bdnews24's report from the site. The Jaflong ECA declaration, the resumption of extraction there and the round-the-clock joint forces: The Daily Star and The Business Standard. The 6 June 2026 directive requiring the Volaganj 10 no. ghat and banning the Kalairag border road, and the 21 June closure with reopening on 22 June: Bangladesh Pratidin, Ittefaq, Risingbd and Jugantor. The Option B route — the boat drop at Doyar Bazar, CNG or bike to Chorar Bazar and the 10–15 minute walk to Utma Chora in Uttar Ranikhai — plus boat fares and the Turung Chora add-on: the Bangladeshi travel guides Vromon Guide, Traveller Himel, Greenbelt and Vromon Songgi, which agree on the route and give fares as overlapping ranges rather than one figure. Published distances from Sylhet to Volaganj vary between about 35 and 39 km, and sources disagree on the length of the Chhatak–Volaganj ropeway, so no figure is given for it here. Locations and restaurant notes: Google Places listings.</p>
-  <p data-t="bn"><strong>ব্যবহৃত সূত্র।</strong> নদীর বর্তমান পানির উচ্চতা ও বন্ধ থাকার খবর: বন্যা পূর্বাভাস ও সতর্কীকরণ কেন্দ্রের বুলেটিন, ঢাকা পোস্ট (২৬ জুলাই ২০২৬), রাইজিংবিডি ও বাংলা ঢাকা ট্রিবিউন (৯ জুলাই) ও অর্থসূচক (১৩ জুলাই) অনুসারে; ২১ জুন ২০২৬-এ সাদাপাথর বন্ধের খবর রাইজিংবিডি ও দেশ রূপান্তর থেকে। পান্থুমাই–বিছনাকান্দি একসঙ্গে নৌপথের তথ্য: বাংলাদেশের সরকারি পর্যটন পোর্টাল beautifulbangladesh.gov.bd, সেই সঙ্গে অফরোড বাংলাদেশ ও ভ্রমণকারীদের বিবরণ। ট্রেনের সময়সূচি, বন্ধের দিন ও ভাড়া: ২০২৬ সালের একাধিক তালিকা থেকে, যেগুলো একে অপরের সঙ্গে মেলে না — একমাত্র কর্তৃপক্ষ বাংলাদেশ রেলওয়ের নিজস্ব পোর্টাল (eticket.railway.gov.bd)। শ্রীপুরের অবস্থান ও বৈশিষ্ট্য: জৈন্তাপুর ইউনিয়ন পরিষদের সাইট ও বাংলা উইকিপিডিয়া — দুটোই বলছে এটি সিলেট–তামাবিল সড়কের পাশে পিয়াইনের ধারে, তবে জাফলং থেকে ঠিক কত দূরে তা নিয়ে দুটোর তথ্য মেলে না। ২৩ এপ্রিল ২০২৬ থেকে সাদাপাথরের পাথর লুট, ৮০ শতাংশের হিসাব, উদ্ধারের পরিমাণ (২৬ লাখ ঘনফুট উদ্ধার, ১১ লাখ ফিরিয়ে বসানো, যেখানে শুরুতে ছিল প্রায় ১ কোটি ৮০ লাখ ঘনফুট), দুই হাজার মানুষের নামে মামলা, সিলেটের ডিসি প্রত্যাহার, আন্তঃমন্ত্রণালয় তদন্ত ও হাইকোর্টের নির্দেশ: দ্য ডেইলি স্টার, দ্য বিজনেস স্ট্যান্ডার্ড, প্রথম আলো, বিডিনিউজ২৪, নিউ এজ ও বাসস। দর্শনার্থীর সংখ্যা ও ভাঙা পাথরের ঝুঁকি: বিডিনিউজ২৪-এর সরেজমিন প্রতিবেদন। জাফলংকে ইসিএ ঘোষণা, সেখানে আবার পাথর তোলা শুরু ও ২৪ ঘণ্টার যৌথ বাহিনী: দ্য ডেইলি স্টার ও দ্য বিজনেস স্ট্যান্ডার্ড। ৬ জুন ২০২৬-এর নির্দেশনা (ভোলাগঞ্জ ১০ নম্বর ঘাট বাধ্যতামূলক, কালাইরাগ হয়ে সীমান্ত সড়ক নিষিদ্ধ) এবং ২১ জুনের বন্ধ ও ২২ জুন আবার খুলে দেওয়া: বাংলাদেশ প্রতিদিন, ইত্তেফাক, রাইজিংবিডি ও যুগান্তর। অপশন B-র রুট — নৌকায় দয়ারবাজারে নামা, সিএনজি বা বাইকে চরার বাজার আর উত্তর রণিখাইয়ে উৎমাছড়া পর্যন্ত ১০–১৫ মিনিট হাঁটা — সেই সঙ্গে নৌকার ভাড়া আর তুরংছড়া: ভ্রমণ গাইড, ট্রাভেলার হিমেল, গ্রিনবেল্ট ও ভ্রমণসঙ্গী। এরা রুটের ব্যাপারে একমত, তবে ভাড়া দিয়েছে একটা নির্দিষ্ট সংখ্যা নয়, পরস্পর মেলানো কয়েকটা পরিসর হিসেবে। সিলেট থেকে ভোলাগঞ্জের প্রকাশিত দূরত্ব প্রায় ৩৫ থেকে ৩৯ কিলোমিটারের মধ্যে ঘোরাফেরা করে, আর ছাতক–ভোলাগঞ্জ রোপওয়ের দৈর্ঘ্য নিয়ে সূত্রগুলো একমত নয় — তাই এখানে ওটার কোনো সংখ্যা দেওয়া হয়নি। অবস্থান ও রেস্টুরেন্ট সংক্রান্ত তথ্য: গুগল প্লেসেস তালিকা।</p>
-  <p class="src" data-t="en">Typography: Noto Sans Bengali and Anek Bangla for Bangla, Inter and Fraunces for Latin. All costs are unverified estimates for negotiation, not quotes. Re-check flood conditions in the week before departure.</p>
-  <p class="src" data-t="bn">টাইপোগ্রাফি: বাংলার জন্য নোটো সান্স বেঙ্গলি ও আনেক বাংলা, ইংরেজির জন্য ইন্টার ও ফ্রনসেস। সব খরচই দরদামের জন্য আনুমানিক হিসাব, কোনো নির্ধারিত দর নয়। যাত্রার আগের সপ্তাহে বন্যা পরিস্থিতি আবার যাচাই করে নিন।</p>
+  <p data-t="en"><strong>How to use these numbers.</strong> All costs are estimates to negotiate from, not quotes. Train fares, boat fares and distances vary between published sources, so treat every figure here as approximate and confirm on the day. Train times and fares: <a href="https://eticket.railway.gov.bd">eticket.railway.gov.bd</a> is the only authority. Flood conditions: <a href="https://ffwc.gov.bd">ffwc.gov.bd</a>, checked daily from 15 August.</p>
+  <p data-t="bn"><strong>এই সংখ্যাগুলো কীভাবে ধরবেন।</strong> সব খরচই দরদাম শুরু করার আনুমানিক হিসাব, নির্ধারিত দর নয়। ট্রেন ভাড়া, নৌকা ভাড়া আর দূরত্ব — সব সূত্রে একরকম নয়, তাই প্রতিটি সংখ্যা আনুমানিক ধরুন আর সেদিন কনফার্ম করে নিন। ট্রেনের সময় ও ভাড়ার একমাত্র ভরসা <a href="https://eticket.railway.gov.bd">eticket.railway.gov.bd</a>। বন্যা পরিস্থিতি: <a href="https://ffwc.gov.bd">ffwc.gov.bd</a>, ১৫ আগস্ট থেকে প্রতিদিন।</p>
+  <p class="src" data-t="en">Site conditions at Sada Pathor, Jaflong and Bichanakandi change month to month. Re-check in the week before you travel.</p>
+  <p class="src" data-t="bn">সাদাপাথর, জাফলং আর বিছনাকান্দির অবস্থা মাসে মাসে বদলায়। রওনা দেওয়ার আগের সপ্তাহে আবার খোঁজ নিন।</p>
 </footer>
 
 </div>
@@ -1083,6 +1146,46 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
   }
   bn.addEventListener('click',function(){set('bn')});
   en.addEventListener('click',function(){set('en')});
+
+  /* ---- table of contents ---- */
+  var toc=document.getElementById('toc');
+  if(!toc) return;
+  var links=[].slice.call(toc.querySelectorAll('a'));
+
+  // As a sidebar the disclosure makes no sense, so pin it open; collapse it
+  // again when the layout falls back to the sticky bar.
+  var wide=window.matchMedia('(min-width:1300px)');
+  function fit(){toc.open=wide.matches}
+  fit();
+  wide.addEventListener?wide.addEventListener('change',fit):wide.addListener(fit);
+
+  // Collapsed bar covers the content it just jumped to, so shut it after a tap.
+  links.forEach(function(a){
+    a.addEventListener('click',function(){if(!wide.matches)toc.open=false});
+  });
+
+  // Highlight whichever target you are currently inside. The day cards sit
+  // inside section 03, so "first one intersecting" would always resolve to
+  // the section and never the card. Targets are in document order, so the
+  // last one whose top has crossed the line is the specific one you are in.
+  var targets=links.map(function(a){
+    return document.getElementById(a.getAttribute('href').slice(1));
+  }).filter(Boolean);
+  var queued=false;
+  function mark(){
+    queued=false;
+    var current=targets.length?targets[0].id:null;
+    targets.forEach(function(t){
+      if(t.getBoundingClientRect().top<=96)current=t.id;
+    });
+    links.forEach(function(a){
+      a.classList.toggle('is-here',a.getAttribute('href')==='#'+current);
+    });
+  }
+  function queue(){if(!queued){queued=true;requestAnimationFrame(mark)}}
+  addEventListener('scroll',queue,{passive:true});
+  addEventListener('resize',queue);
+  mark();
 })();
 </script>
 </body>
