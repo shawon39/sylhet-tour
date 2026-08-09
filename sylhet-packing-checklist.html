@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>সিলেট ট্যুর প্যাকিং চেকলিস্ট — ২২–২৫ আগস্ট ২০২৬</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#f4f6fa; --bg2:#eaeef5; --card:#ffffff; --card2:#f7f9fc;
+  --line:#dde3ec; --txt:#16202e; --mut:#5f6d80;
+  --acc:#0b69d4; --ok:#12995f; --warn:#b06f00; --danger:#c93636;
+  --rad:14px;
+}
+[data-theme="dark"]{
+  --bg:#0e1116; --bg2:#151a22; --card:#1a212b; --card2:#212a36;
+  --line:#2b3644; --txt:#e6ecf4; --mut:#8d9bb0;
+  --acc:#4ea1ff; --ok:#3ecf8e; --warn:#ffb547; --danger:#ff6b6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Noto Sans Bengali','Inter',system-ui,sans-serif;
+  background:var(--bg); color:var(--txt); line-height:1.65;
+  padding:0 0 80px; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+
+svg.ic{width:18px;height:18px;flex:0 0 auto;stroke:currentColor;stroke-width:1.7;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
+
+/* ---------- HEADER ---------- */
+header{
+  background:linear-gradient(160deg,var(--bg2),var(--bg));
+  border-bottom:1px solid var(--line); padding:34px 0 26px; margin-bottom:22px;
+}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:700;font-family:'Inter',sans-serif}
+h1{font-size:30px;font-weight:700;margin:8px 0 6px;letter-spacing:-.3px}
+.sub{color:var(--mut);font-size:15px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:6px 14px;font-size:13px;color:var(--mut);
+  display:inline-flex;align-items:center;gap:7px;
+}
+.chip svg.ic{width:15px;height:15px;color:var(--acc)}
+.chip b{color:var(--txt);font-weight:600}
+
+/* ---------- TOOLBAR ---------- */
+.bar{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--rad);
+  padding:14px 16px;margin-bottom:20px;position:sticky;top:0;z-index:20;
+}
+.ring{width:52px;height:52px;flex:0 0 52px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring span{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-size:12px;font-weight:700;font-family:'Inter',sans-serif
+}
+.barinfo{flex:1;min-width:150px}
+.barinfo .t{font-size:14px;font-weight:600}
+.barinfo .s{font-size:12.5px;color:var(--mut)}
+button{
+  font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;
+  background:var(--card2);color:var(--txt);border:1px solid var(--line);
+  border-radius:9px;padding:8px 13px;transition:.15s;
+  display:inline-flex;align-items:center;gap:6px;
+}
+button svg.ic{width:15px;height:15px}
+button:hover{border-color:var(--acc);color:var(--acc)}
+button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+button.on:hover{color:#fff}
+button.icon-only{padding:8px 9px}
+
+/* ---------- NOTE ---------- */
+.note{
+  background:var(--card);border:1px solid var(--line);border-left:3px solid var(--warn);
+  border-radius:10px;padding:14px 16px;margin-bottom:22px;font-size:14px;color:var(--mut)
+}
+.note b{color:var(--txt)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;vertical-align:middle;margin-right:2px}
+.dot.r{background:var(--danger)} .dot.b{background:var(--acc)}
+.alert{
+  background:rgba(201,54,54,.06);border:1px solid rgba(201,54,54,.3);
+  border-left:3px solid var(--danger);border-radius:10px;
+  margin-bottom:22px;font-size:13.5px;color:var(--mut);overflow:hidden
+}
+[data-theme="dark"] .alert{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.35)}
+.alert .ahead{
+  display:flex;align-items:center;gap:11px;padding:13px 16px;cursor:pointer;user-select:none
+}
+.alert .ahead:hover{background:rgba(201,54,54,.05)}
+.alert .ahead svg.ic{width:19px;height:19px;color:var(--danger)}
+.alert .ahead b{color:var(--txt);flex:1;font-size:14px}
+.alert .acaret{color:var(--mut);display:flex;transition:.2s}
+.alert .acaret svg.ic{width:16px;height:16px;color:var(--mut)}
+.alert.closed .acaret{transform:rotate(-90deg)}
+.alert.closed .abody{display:none}
+.abody{padding:0 16px 14px 46px}
+.alert b{color:var(--txt)}
+.alert ul{list-style:disc;padding:2px 0 0 18px}
+.alert li{display:list-item;padding:3px 0;font-size:13.5px;cursor:default}
+.alert li:hover{background:none}
+
+/* ---------- SECTIONS ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;align-items:start}
+section{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--rad);
+  overflow:hidden;break-inside:avoid
+}
+.head{
+  display:flex;align-items:center;gap:11px;padding:14px 16px;cursor:pointer;
+  border-bottom:1px solid var(--line);user-select:none
+}
+.head:hover{background:var(--card2)}
+.ico{
+  width:34px;height:34px;flex:0 0 34px;border-radius:9px;display:grid;place-items:center;
+  background:var(--card2);border:1px solid var(--line);color:var(--acc)
+}
+.ico svg.ic{width:18px;height:18px}
+.htitle{flex:1;min-width:0}
+.htitle .n{font-size:14.5px;font-weight:700;line-height:1.35}
+.htitle .c{font-size:12px;color:var(--mut);font-family:'Inter',sans-serif}
+.caret{color:var(--mut);display:flex;transition:.2s}
+.caret svg.ic{width:16px;height:16px}
+section.closed .caret{transform:rotate(-90deg)}
+section.closed ul{display:none}
+ul{list-style:none;padding:6px 0}
+li{
+  display:flex;gap:11px;align-items:flex-start;padding:8px 16px;
+  font-size:14px;cursor:pointer;transition:.12s
+}
+li:hover{background:var(--card2)}
+.box{
+  width:19px;height:19px;flex:0 0 19px;margin-top:2px;border-radius:5px;
+  border:1.8px solid var(--line);display:grid;place-items:center;transition:.15s
+}
+.box svg.ic{width:12px;height:12px;stroke-width:3;color:#fff;opacity:0;transition:.15s}
+li.done .box{background:var(--ok);border-color:var(--ok)}
+li.done .box svg.ic{opacity:1}
+li.done .lbl{text-decoration:line-through;color:var(--mut)}
+.lbl{flex:1}
+
+/* ---- ignore ---- */
+.ig{
+  flex:0 0 auto;width:24px;height:24px;border-radius:6px;border:1px solid transparent;
+  display:grid;place-items:center;color:var(--mut);background:none;padding:0;opacity:0;
+  transition:.15s;margin-top:-1px
+}
+.ig svg.ic{width:14px;height:14px}
+li:hover .ig,li.ignored .ig{opacity:1}
+@media (hover:none){ .ig{opacity:.45} }
+.ig:hover{border-color:var(--line);background:var(--bg2);color:var(--danger)}
+li.ignored{display:none}
+body.show-ignored li.ignored{display:flex;opacity:.55}
+body.show-ignored li.ignored .lbl{text-decoration:line-through}
+body.show-ignored li.ignored .box{visibility:hidden}
+li.ignored .ig:hover{color:var(--ok)}
+.igcount{
+  font-size:11px;font-weight:700;font-family:'Inter',sans-serif;
+  background:var(--card2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;margin-left:5px
+}
+.lbl small{display:block;font-size:12px;color:var(--mut);line-height:1.5;margin-top:1px}
+.tag{
+  font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;
+  font-family:'Inter',sans-serif;letter-spacing:.04em;white-space:nowrap;margin-top:3px
+}
+.t-must{background:rgba(255,107,107,.15);color:var(--danger)}
+.t-baby{background:rgba(78,161,255,.15);color:var(--acc)}
+body.hide-done li.done{display:none}
+
+footer{text-align:center;color:var(--mut);font-size:12.5px;margin-top:34px;padding-top:20px;border-top:1px solid var(--line)}
+footer a{color:var(--acc);text-decoration:none}
+
+@media print{
+  body{background:#fff;color:#000;padding:0}
+  .bar,.ig{display:none!important}
+  .alert.closed .abody{display:block}
+  li.ignored{display:none!important}
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  section{border:1px solid #ccc;break-inside:avoid}
+  section.closed ul{display:block}
+  li{padding:3px 10px;font-size:11px}
+  .lbl small{font-size:9px}
+}
+@media(max-width:640px){
+  h1{font-size:23px}
+  .grid{grid-template-columns:1fr}
+  .bar{padding:11px 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG SPRITE ===== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="10.5" r="2"/><path d="M4.8 16.5c.6-1.5 1.8-2.3 3.2-2.3s2.6.8 3.2 2.3"/><path d="M14.5 9.5h5M14.5 13.5h5"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M9 3 3 6l2 4 2-1v11h10V9l2 1 2-4-6-3a3 3 0 0 1-6 0Z"/></symbol>
+  <symbol id="i-dress" viewBox="0 0 24 24"><path d="M9 2h6l-1 4.5 4 10.5a3 3 0 0 1-2.8 4H8.8A3 3 0 0 1 6 17L10 6.5 9 2Z"/><path d="M10 6.5h4"/></symbol>
+  <symbol id="i-baby" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 10.5h.01M15 10.5h.01"/><path d="M9.3 15a3.6 3.6 0 0 0 5.4 0"/></symbol>
+  <symbol id="i-shoe" viewBox="0 0 24 24"><path d="M3 5h5v6l5.2 2.2 6 2.4A2 2 0 0 1 20.5 17.5V20H3Z"/><path d="M8 11.3l2.6 1.1M12 13l2.4 1"/></symbol>
+  <symbol id="i-umbrella" viewBox="0 0 24 24"><path d="M12 2v2"/><path d="M2.5 13a9.5 9.5 0 0 1 19 0Z"/><path d="M12 13v5.5a2.8 2.8 0 0 0 5.6 0"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7Z"/><path d="M7 10l7 7"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.8 4.3 13.2A4.9 4.9 0 0 1 11 6.1l1 1 1-1a4.9 4.9 0 0 1 6.7 7.1Z"/><path d="M12 10v5M9.5 12.5h5"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2.5s6.2 6.6 6.2 10.2a6.2 6.2 0 0 1-12.4 0C5.8 9.1 12 2.5 12 2.5Z"/><path d="M9 13.5a3 3 0 0 0 3 3"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2.5"/><path d="M21.5 10.5v3"/><path d="M6 10.5v3M10 10.5v3"/></symbol>
+  <symbol id="i-bottle" viewBox="0 0 24 24"><path d="M10 2h4v3h-4z"/><path d="M9.5 5h5v3l1.2 2.2V20a2 2 0 0 1-2 2h-3.4a2 2 0 0 1-2-2V10.2L9.5 8V5Z"/><path d="M10 12.5h2.6M10 15.5h2.6"/></symbol>
+  <symbol id="i-train" viewBox="0 0 24 24"><rect x="4" y="2.5" width="16" height="13.5" rx="3"/><path d="M4 10h16"/><circle cx="8.5" cy="13" r="1"/><circle cx="15.5" cy="13" r="1"/><path d="M6.5 21l2-5M17.5 21l-2-5"/><path d="M5 21h14"/></symbol>
+  <symbol id="i-boat" viewBox="0 0 24 24"><path d="M3.5 14.5h17l-2.3 4.6a2 2 0 0 1-1.8 1.1H7.6a2 2 0 0 1-1.8-1.1Z"/><path d="M11.5 14.5V2.5L5.5 12"/><path d="M14 14.5V7l4.5 5"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 8.5a6 6 0 0 1 12 0V19a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 6 19Z"/><path d="M9 8.5v-3a3 3 0 0 1 6 0v3"/><path d="M9 14.5h6"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2c1.4 0 2 1.9 2 3.9v3.4l7 4v2.4l-7-2v3.9l2.4 1.9V21L12 19.6 7.6 21v-1.5L10 17.6v-3.9l-7 2v-2.4l7-4V5.9C10 3.9 10.6 2 12 2Z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.4V20a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20V9.4"/><path d="M9.5 21.5v-6h5v6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-temp" viewBox="0 0 24 24"><path d="M14 14.8V4.5a2.5 2.5 0 0 0-5 0v10.3a4.5 4.5 0 1 0 5 0Z"/><path d="M11.5 8h2.5"/></symbol>
+  <symbol id="i-rain" viewBox="0 0 24 24"><path d="M17.5 15.5a4.5 4.5 0 0 0-.9-8.9 6 6 0 0 0-11.4 2A3.8 3.8 0 0 0 6 15.5Z"/><path d="M8 18.5l-1 2.5M12 18.5l-1 2.5M16 18.5l-1 2.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-caret" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.8 13.2A8.6 8.6 0 1 1 11 3.2a6.8 6.8 0 0 0 9.8 10Z"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8L3 5Z"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><path d="M6 18H4.5A1.5 1.5 0 0 1 3 16.5v-5A2.5 2.5 0 0 1 5.5 9h13A2.5 2.5 0 0 1 21 11.5v5a1.5 1.5 0 0 1-1.5 1.5H18"/><rect x="7" y="14" width="10" height="7" rx="1"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4v5h5"/></symbol>
+  <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="1.5"/><path d="M9 10.5 5.5 7M15 10.5 18.5 7M9 13.5 5.5 17M15 13.5 18.5 17"/><circle cx="4" cy="5.5" r="2.2"/><circle cx="20" cy="5.5" r="2.2"/><circle cx="4" cy="18.5" r="2.2"/><circle cx="20" cy="18.5" r="2.2"/></symbol>
+  <symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M10.6 6.3A9.6 9.6 0 0 1 12 6.2c5 0 9 4 10 5.8a15 15 0 0 1-3.1 3.7"/><path d="M6.3 8.3A15.6 15.6 0 0 0 2 12c1 1.8 5 5.8 10 5.8a9.8 9.8 0 0 0 3.9-.8"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><path d="M3 3l18 18"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 4v5h5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4.5M12 17h.01"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Packing Checklist</div>
+    <h1>সিলেট ট্যুর — প্যাকিং চেকলিস্ট</h1>
+    <p class="sub">শাখাওয়াত • ওয়াইফ • বেবি (২ বছর) — ৩ রাত ৪ দিন</p>
+    <div class="meta">
+      <div class="chip"><svg class="ic"><use href="#i-calendar"/></svg><b>২২–২৫ আগস্ট ২০২৬</b></div>
+      <div class="chip"><svg class="ic"><use href="#i-temp"/></svg><b>৩৩°/২৬°C</b> · আর্দ্র</div>
+      <div class="chip"><svg class="ic"><use href="#i-rain"/></svg>বর্ষা · <b>~৬৪১ মিমি</b>, ১৭ বৃষ্টির দিন</div>
+      <div class="chip"><svg class="ic"><use href="#i-train"/></svg>ট্রেনে যাওয়া <svg class="ic"><use href="#i-plane"/></svg>ফ্লাইটে ফেরা</div>
+      <div class="chip"><svg class="ic"><use href="#i-boat"/></svg>বোট ট্রিপ <b>Day 2 & 3</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="bar">
+    <div class="ring">
+      <svg width="52" height="52">
+        <circle cx="26" cy="26" r="22" fill="none" stroke="var(--line)" stroke-width="5"/>
+        <circle id="prog" cx="26" cy="26" r="22" fill="none" stroke="var(--ok)" stroke-width="5"
+                stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
+      </svg>
+      <span id="pct">0%</span>
+    </div>
+    <div class="barinfo">
+      <div class="t">প্যাকিং প্রোগ্রেস</div>
+      <div class="s"><b id="cdone">0</b> / <span id="ctot">0</span> আইটেম গোছানো হয়েছে</div>
+    </div>
+    <button id="filter"><svg class="ic"><use href="#i-filter"/></svg>শুধু বাকিগুলো</button>
+    <button id="showig"><svg class="ic"><use href="#i-eyeoff"/></svg>ইগনোর দেখাও<span class="igcount" id="ignum">0</span></button>
+    <button id="expand"><svg class="ic"><use href="#i-expand"/></svg><span>সব বন্ধ করুন</span></button>
+    <button onclick="window.print()"><svg class="ic"><use href="#i-print"/></svg>প্রিন্ট</button>
+    <button class="icon-only" id="theme" title="থিম"><svg class="ic"><use id="themeuse" href="#i-sun"/></svg></button>
+    <button class="icon-only" id="reset" title="রিসেট"><svg class="ic"><use href="#i-reset"/></svg></button>
+  </div>
+
+  <div class="note">
+    <b>কীভাবে চলে:</b> আইটেমে ক্লিক করলে টিক পড়বে, আবার ক্লিক করলে উঠে যাবে। ডানপাশের
+    <svg class="ic" style="display:inline-block;width:13px;height:13px;vertical-align:-2px"><use href="#i-eyeoff"/></svg>
+    বাটনে ক্লিক করলে আইটেমটা <b>ইগনোর</b> হয়ে লুকিয়ে যাবে ও প্রোগ্রেসের হিসাব থেকে বাদ পড়বে।
+    উপরের <b>ইগনোর দেখাও</b> বাটনে সেগুলো ফিরিয়ে আনতে পারবে। সব কিছু ব্রাউজারে সেভ থাকে।
+    <span class="dot r"></span> <b>MUST</b> = মিস করা যাবে না। <span class="dot b"></span> <b>BABY</b> = বেবির জন্য।
+  </div>
+
+  <div class="alert closed" id="alert">
+    <div class="ahead">
+      <svg class="ic"><use href="#i-alert"/></svg>
+      <b>ড্রোন: নিয়ে যাও — তবে কোথায় ওড়াবে সেটাই আসল কথা</b>
+      <span style="font-size:12px;font-family:'Inter',sans-serif">বিস্তারিত</span>
+      <span class="acaret"><svg class="ic"><use href="#i-caret"/></svg></span>
+    </div>
+    <div class="abody">
+      <ul>
+        <li><b>আগের সতর্কতাটা বেশি কড়া ছিল, ঠিক করে নিলাম।</b> ড্রোন নিবন্ধন ও উড্ডয়ন নীতিমালা ২০২০-এ <b>গ্রিন জোন</b> বলে ব্যবস্থা আছে: বিমানবন্দর/KPI থেকে <b>৫ কিমি বাইরে</b> ও <b>১০০ ফুটের নিচে</b> উড়লে শ্রেণি "ক" (বিনোদনমূলক, ৫ কেজির কম) ড্রোনে আগাম অনুমতি লাগে না। ৪৫ দিনের প্রসেসটা মূলত কমার্শিয়াল শুটিং ও বিদেশি ক্রুদের জন্য — তোমার ২৪৯g হবি ড্রোনের জন্য না।</li>
+        <li><b>বাস্তবেও মানুষ ওড়ায়।</b> জাফলং, বিছনাকান্দি, পাংথুমাইয়ের ড্রোন ফুটেজে ইউটিউব ভর্তি — লোকাল ভ্লগাররা নিয়মিত ওড়াচ্ছে। শখের ড্রোনের জন্য পর্যটক আটক হওয়ার কোনো খবর পাইনি।</li>
+        <li><b>তবে ৩টা জায়গায় ওড়াবে না —</b> এগুলোতে আমার আপত্তি বহাল:</li>
+        <li><b>১. জাফলং জিরো পয়েন্ট।</b> ওটা আক্ষরিক অর্থেই সীমান্তরেখা, ওপারে BSF। সিলেট সীমান্ত এখন উত্তপ্ত — গুলি ও পুশ-ইনের ঘটনা ঘটছে। ডাউকি ব্রিজের দিকে ক্যামেরা তাক করলে সেটা আর হবি থাকে না।</li>
+        <li><b>২. মালনীছড়া চা বাগান।</b> আগে এটাই সাজেস্ট করেছিলাম — <b>ভুল ছিল।</b> মালনীছড়া ওসমানী এয়ারপোর্টের গা ঘেঁষে, ৫ কিমি রিংয়ের ভেতরেই পড়ে। শহরের ভেতরটাই বরং বেশি রেস্ট্রিক্টেড।</li>
+        <li><b>৩. ভিড়ের ওপর</b> — জিরো পয়েন্টের ঘাট বা দরগা এলাকা। পড়লে মানুষ আহত হবে, আর তখন নিয়ম কী বলে সেটা আর কেউ শুনবে না।</li>
+        <li><b>ভালো জায়গা:</b> বিছনাকান্দি, পাংথুমাই, লালাখাল, সাদা পাথর — জিরো পয়েন্ট থেকে দূরে থেকে, ১০০ ফুটের নিচে, ছোট ফ্লাইট। লালাখালের নীল পানি ড্রোন থেকে সবচেয়ে ভালো আসে।</li>
+        <li><b>যাওয়ার আগে একবার চেক করো:</b> নির্বাচন বা রাজনৈতিক কর্মসূচির সময় সরকার মাঝেমধ্যে <b>সারাদেশে সাময়িক ড্রোন নিষেধাজ্ঞা</b> দেয়। ২১ আগস্ট caab.portal.gov.bd বা খবরে দেখে নাও।</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    সোর্স: আবহাওয়া ডেটা — weather-and-climate.com · বর্ষা ভ্রমণ পরামর্শ — The Daily Star, ভ্রমণ গাইড<br>
+    ট্যুর প্ল্যান: <a href="https://shawon39.github.io/sylhet-tour/">shawon39.github.io/sylhet-tour</a>
+  </footer>
+</div>
+
+<script>
+const DATA = [
+  {i:"i-id", n:"ডকুমেন্টস, টাকা ও বুকিং", items:[
+    ["NID / ড্রাইভিং লাইসেন্স — তোমার ও ওয়াইফের","must"],
+    ["বেবির জন্ম নিবন্ধন সনদের কপি","ফ্লাইটে ইনফ্যান্ট/চাইল্ড টিকিটে বয়স প্রমাণ চাইতে পারে","baby"],
+    ["ট্রেন টিকিট — প্রিন্ট + ফোনে PDF","পারাবত এক্সপ্রেস, ২২ আগস্ট সকাল ৬:৩০","must"],
+    ["ফ্লাইট টিকিট — প্রিন্ট + PDF","২৫ আগস্ট দুপুর ২:৩০, ওসমানী এয়ারপোর্ট","must"],
+    ["হোটেল বুকিং কনফার্মেশন","হোটেল নূরজাহান গ্র্যান্ড, দরগা গেট — 01930-111666"],
+    ["ক্যাশ টাকা — ছোট নোট বেশি রাখো","নৌকা ভাড়া, CNG, ঘাটের টোল — কার্ড চলে না","must"],
+    ["২টা আলাদা জায়গায় টাকা ভাগ করে রাখো","একজনের কাছে সব রাখা ঝুঁকি"],
+    ["ATM কার্ড + bKash/Nagad-এ ব্যালেন্স","জিন্দাবাজার/আম্বরখানায় ATM আছে"],
+    ["ইমার্জেন্সি কন্টাক্ট লিস্ট — কাগজে লেখা","ফোন ভিজে গেলে/চার্জ শেষ হলে কাজে দেবে"],
+    ["হোটেল ও মাইক্রোবাস ড্রাইভারের নম্বর সেভ"]
+  ]},
+
+  {i:"i-shirt", n:"তোমার পোশাক (৪ দিন)", items:[
+    ["সুতির টি-শার্ট / পাতলা শার্ট — ৫টা","আর্দ্রতা ৮০%+, ঘামে ভিজবে — দিনে ২টা লাগতে পারে"],
+    ["কুইক-ড্রাই টি-শার্ট — ২টা","বোট ট্রিপের দিনের জন্য; সুতি ভিজলে শুকায় না","must"],
+    ["ট্রাউজার / জিন্স — ২টা","হোটেল ও শহরে ঘোরার জন্য"],
+    ["কুইক-ড্রাই প্যান্ট বা থ্রি-কোয়ার্টার — ২টা","জাফলং, বিছনাকান্দি, পাংথুমাই — পানিতে নামতে হবে","must"],
+    ["লুঙ্গি / ট্রাউজার — হোটেলে পরার জন্য"],
+    ["আন্ডারওয়্যার — ৬টা","ভেজা কাপড় শুকাতে ২ দিন লাগে, বেশি নাও"],
+    ["মোজা — ৪ জোড়া"],
+    ["পাতলা ফুল-স্লিভ শার্ট — ১টা","মাজার জিয়ারত ও রোদ/মশা থেকে বাঁচতে"],
+    ["গামছা / দ্রুত শুকানো টাওয়েল — ২টা","হোটেল টাওয়েল বাইরে নেওয়া যাবে না","must"],
+    ["ক্যাপ বা হ্যাট"]
+  ]},
+
+  {i:"i-dress", n:"ওয়াইফের পোশাক (৪ দিন)", items:[
+    ["সুতির সালোয়ার-কামিজ — ৪ সেট","গরম ও আর্দ্রতায় সুতিই আরামদায়ক"],
+    ["ওড়না — ৫টা","মাজারে ও গ্রামীণ এলাকায় মাথা ঢাকার জন্য লাগবে","must"],
+    ["দ্রুত শুকানো কাপড়ের এক সেট","বোটের দিনে ভিজলে দ্রুত শুকাবে","must"],
+    ["আন্ডারগার্মেন্টস — ৬ সেট"],
+    ["হোটেলে পরার আরামদায়ক পোশাক — ১ সেট"],
+    ["স্কার্ফ / হালকা চাদর","ট্রেনের AC ও রাতের ঠান্ডা বাতাসের জন্য"],
+    ["হেয়ার টাই, ক্লিপ, ছোট আয়না"],
+    ["স্যানিটারি প্যাড","তারিখ না থাকলেও ব্যাকআপ হিসেবে — ওখানে খুঁজতে হবে না","must"],
+    ["দ্রুত শুকানো টাওয়েল — ১টা"],
+    ["পাতলা রেইন পঞ্চো বা লম্বা রেইনকোট","ছাতা এক হাত আটকে রাখে, বেবি কোলে থাকলে সমস্যা"]
+  ]},
+
+  {i:"i-baby", n:"বেবির পোশাক (২ বছর)", items:[
+    ["সুতির জামা/সেট — ৮ সেট","বাচ্চা দিনে ২-৩ বার কাপড় নষ্ট করে, বেশি নাও","must"],
+    ["ফুল-স্লিভ পাতলা জামা — ৩টা","মশা ও রোদ থেকে বাঁচাবে","baby"],
+    ["রাতে ঘুমানোর আরামদায়ক পোশাক — ৩ সেট","baby"],
+    ["পাতলা সোয়েটার / হুডি — ১টা","ট্রেনের AC ও নৌকায় বাতাস ঠান্ডা লাগে","must"],
+    ["মোজা — ৪ জোড়া","baby"],
+    ["ক্যাপ / সান হ্যাট","baby"],
+    ["বিব — ৪টা","baby"],
+    ["ছোট তোয়ালে — ২টা","baby"],
+    ["পাতলা কাঁথা / ব্ল্যাঙ্কেট — ১টা","ট্রেনে ৭ ঘণ্টা ঘুমানোর জন্য","must"],
+    ["বেবির রেইন কভার বা বড় ছাতা","baby"]
+  ]},
+
+  {i:"i-shoe", n:"জুতা ও ফুটওয়্যার", items:[
+    ["গ্রিপওয়ালা রাবার স্যান্ডেল / ট্রেকিং স্যান্ডেল — তোমার","ভেজা পাথরে পিছলে পড়া সবচেয়ে বড় রিস্ক","must"],
+    ["সাদা পাথরের জন্য বন্ধ জুতা","২০২৬-এর এপ্রিলে লুটপাটে ভাঙা পাথর ছড়িয়ে আছে — খালি পায়ে যাওয়া যাবে না","must"],
+    ["ওয়াইফের জন্য গ্রিপওয়ালা স্যান্ডেল","স্লিপার পরে নৌকা/পাথরে নামা যাবে না","must"],
+    ["স্বাভাবিক জুতা / স্নিকার — শহরে ও এয়ারপোর্টে"],
+    ["বেবির জন্য বন্ধ জুতা + স্যান্ডেল দুটোই","baby"],
+    ["হোটেলে পরার স্লিপার — ৩ জোড়া","হোটেলেরটা ভরসা না করাই ভালো"],
+    ["ভেজা জুতা রাখার প্লাস্টিক ব্যাগ — ৩টা","ব্যাগের ভেতর অন্য কাপড় নষ্ট হবে না","must"]
+  ]},
+
+  {i:"i-umbrella", n:"রেইন গিয়ার ও ওয়াটারপ্রুফিং", items:[
+    ["ছাতা — ২টা (বড়)","\"ছাতা অবশ্যই নিন, 'সামান্য গুঁড়ি গুঁড়ি' ভরসা করবেন না\" — The Daily Star","must"],
+    ["রেইনকোট / পঞ্চো — ৩টা (বেবিরটাসহ)","must"],
+    ["ওয়াটারপ্রুফ ড্রাই ব্যাগ — ২টা","নৌকায় ফোন, টাকা, ক্যামেরা রাখার জন্য অপরিহার্য","must"],
+    ["ফোনের ওয়াটারপ্রুফ পাউচ — ৩টা","গলায় ঝুলিয়ে রাখা যায়, বোটে ছবি তুলতে সুবিধা","must"],
+    ["জিপলক ব্যাগ — ১০টা (বিভিন্ন সাইজ)","ভেজা কাপড়, ডকুমেন্ট, ওষুধ আলাদা রাখতে"],
+    ["ব্যাকপ্যাকের রেইন কভার"],
+    ["বড় পলিথিন — ৫টা","ভেজা কাপড় ও নোংরা ডায়াপার আলাদা করতে"],
+    ["মাইক্রোফাইবার টাওয়েল — ২টা","দ্রুত শুকায়, জায়গা কম নেয়"]
+  ]},
+
+  {i:"i-pill", n:"মেডিসিন — বড়দের", items:[
+    ["তোমাদের নিয়মিত ওষুধ (যদি থাকে) — পুরো ট্রিপের ডোজ + ২ দিন এক্সট্রা","must"],
+    ["প্যারাসিটামল (Napa/Ace)","জ্বর ও মাথাব্যথা","must"],
+    ["ORS স্যালাইন — ৮ প্যাকেট","গরম ও ঘামে পানিশূন্যতা, পেট খারাপ — দুটোতেই কাজে দেয়","must"],
+    ["পেট খারাপের ওষুধ (Imotil/Flagyl)","বাইরের খাবার ও পানিতে রিস্ক বেশি","must"],
+    ["গ্যাস্ট্রিক/অ্যান্টাসিড (Seclo, Antacid+)","সিলেটি খাবার প্রচণ্ড ঝাল ও তেলযুক্ত","must"],
+    ["মোশন সিকনেসের ওষুধ (Avomine/Onaseron)","৭ ঘণ্টা ট্রেন + পাহাড়ি রাস্তায় মাইক্রোবাস + নৌকা","must"],
+    ["অ্যান্টিহিস্টামিন (Fexo/Alatrol)","অ্যালার্জি ও পোকার কামড়ে"],
+    ["ব্যথার ওষুধ (Napa Extra / Tufnil)"],
+    ["ফার্স্ট এইড: ব্যান্ড-এইড, অ্যান্টিসেপটিক (Savlon), তুলা, গজ","ভেজা পাথরে কাটাছেঁড়া খুব সাধারণ","must"],
+    ["অ্যান্টিসেপটিক ক্রিম (Neosporin/Viodin)"],
+    ["থার্মোমিটার — ডিজিটাল"],
+    ["সর্দি-কাশির ওষুধ + লজেন্স","ভেজা কাপড়ে ঠান্ডা লেগে যাওয়া কমন"]
+  ]},
+
+  {i:"i-heart", n:"মেডিসিন ও কেয়ার — বেবি (২ বছর)", items:[
+    ["বেবির প্যারাসিটামল সিরাপ (Napa syrup) + মেজারিং সিরিঞ্জ","ডোজ ওজন অনুযায়ী — ডাক্তারের দেওয়াটাই নাও","must"],
+    ["বেবি ORS / স্যালাইন","বাচ্চা দ্রুত ডিহাইড্রেট হয় — সবচেয়ে জরুরি আইটেম","must"],
+    ["বেবির অ্যান্টিহিস্টামিন সিরাপ (ডাক্তারের পরামর্শে)","baby"],
+    ["পেট খারাপের জন্য জিংক সিরাপ ও প্রোবায়োটিক","baby"],
+    ["ডায়াপার র‍্যাশ ক্রিম","ভেজা আবহাওয়ায় র‍্যাশ প্রায় নিশ্চিত","must"],
+    ["শিশুদের মশা তাড়ানোর ক্রিম (baby-safe)","জাফলং ও চা বাগানে মশা বেশি","must"],
+    ["নাকের ড্রপ (স্যালাইন ড্রপ)","baby"],
+    ["বেবির থার্মোমিটার","baby"],
+    ["বেবির নিয়মিত ওষুধ/ভিটামিন","baby"],
+    ["শিশু ডাক্তারের নম্বর ও প্রেসক্রিপশনের ছবি","সিলেটে ইমার্জেন্সি হলে দেখাতে পারবে","must"]
+  ]},
+
+  {i:"i-drop", n:"টয়লেট্রিজ ও পার্সোনাল কেয়ার", items:[
+    ["টুথব্রাশ ৩টা + টুথপেস্ট"],
+    ["সাবান / বডি ওয়াশ, শ্যাম্পু (ছোট বোতল)"],
+    ["বেবির আলাদা সাবান ও শ্যাম্পু","baby"],
+    ["হ্যান্ড স্যানিটাইজার — ২টা","বাইরে খাওয়ার আগে, ঘাটে পানি নেই","must"],
+    ["ওয়েট ওয়াইপস — ৩ প্যাকেট","বেবির জন্য ও নিজেদের জন্য — সবচেয়ে বেশি কাজে লাগবে","must"],
+    ["টিস্যু পেপার / টয়লেট পেপার রোল","গ্রামীণ টয়লেটে কিছুই থাকে না","must"],
+    ["সানস্ক্রিন SPF 50","মেঘলা দিনেও UV বেশি"],
+    ["মশা তাড়ানোর স্প্রে/ক্রিম (Odomos)","must"],
+    ["পাউডার (প্রিকলি হিট)","ঘামাচি ও র‍্যাশ ঠেকাতে — আর্দ্রতা ৮৫%+"],
+    ["চিরুনি, নেইল কাটার, ছোট কাঁচি"],
+    ["লিপবাম, ময়েশ্চারাইজার"],
+    ["শেভিং কিট"],
+    ["সানগ্লাস — ২টা"]
+  ]},
+
+  {i:"i-battery", n:"ইলেকট্রনিক্স", items:[
+    ["পাওয়ার ব্যাংক — ২টা (২০,০০০mAh)","সালুটিকরের পরে মোবাইল সিগন্যাল দুর্বল, ব্যাটারি দ্রুত শেষ হয়","must"],
+    ["চার্জার + লম্বা কেবল — ৩ সেট","must"],
+    ["মাল্টিপ্লাগ / এক্সটেনশন","হোটেলে সকেট কম থাকে"],
+    ["ইয়ারফোন","ট্রেনে ৭ ঘণ্টা"],
+    ["ক্যামেরা + এক্সট্রা ব্যাটারি + মেমোরি কার্ড"],
+    ["ফোনে অফলাইন ম্যাপ ডাউনলোড (Google Maps)","জাফলং-বিছনাকান্দিতে নেটওয়ার্ক থাকে না","must"],
+    ["ছোট টর্চ / হেডল্যাম্প","লোডশেডিং ও রাতের ঘাটে"],
+    ["পাওয়ার ব্যাংক ফ্লাইটে হ্যান্ড ব্যাগে","চেক-ইন লাগেজে দিলে বাজেয়াপ্ত হবে","must"]
+  ]},
+
+  {i:"i-drone", n:"ড্রোন কিট (২৪৯g) ও আইনি প্রস্তুতি", items:[
+    ["২১ আগস্ট চেক: সারাদেশে সাময়িক ড্রোন নিষেধাজ্ঞা চালু আছে কি না","রাজনৈতিক কর্মসূচি/নির্বাচনের সময় হুট করে জারি হয় — caab.portal.gov.bd বা খবরে","must"],
+    ["জাফলং জিরো পয়েন্টে ওড়াবে না","আক্ষরিক সীমান্তরেখা, ওপারে BSF; সিলেট সীমান্ত এখন উত্তপ্ত","must"],
+    ["মালনীছড়া চা বাগানে ওড়াবে না","ওসমানী এয়ারপোর্টের ৫ কিমি রিংয়ের ভেতরে পড়ে","must"],
+    ["১০০ ফুটের নিচে ওড়াও — এটাই গ্রিন জোনের শর্ত","নীতিমালা ২০২০: এয়ারপোর্ট/KPI থেকে ৫ কিমি বাইরে + ১০০ ফুটের নিচে = অনুমতি লাগে না","must"],
+    ["ভালো স্পট: বিছনাকান্দি, পাংথুমাই, লালাখাল, সাদা পাথর","জিরো পয়েন্ট থেকে দূরে থেকে ছোট ফ্লাইট"],
+    ["ড্রোনের ক্রয় রসিদের কপি ফোনে রাখো","কেউ প্রশ্ন করলে দেখাতে পারবে"],
+    ["ড্রোন + রিমোট কন্ট্রোলার"],
+    ["এক্সট্রা ব্যাটারি ২-৩টা, সব ফুল চার্জ","২৪৯g ড্রোনের ফ্লাইট টাইম কম, বাতাসে আরও কমে"],
+    ["ব্যাটারি ফায়ারপ্রুফ LiPo ব্যাগে","ফ্লাইটে ব্যাটারি হ্যান্ড ব্যাগে নিতেই হবে, চেক-ইনে নয়","must"],
+    ["ব্যাটারি চার্জার + হাব"],
+    ["এক্সট্রা প্রপেলার — ২ সেট","হালকা ড্রোন বাতাসে বেশি ধাক্কা খায়, প্রপ ভাঙা কমন"],
+    ["মেমোরি কার্ড ২টা + কার্ড রিডার"],
+    ["ND ফিল্টার সেট","মেঘলা-উজ্জ্বল বর্ষার আলোয় কাজে দেয়"],
+    ["হার্ড কেস / প্যাডেড ব্যাগ","৭ ঘণ্টা ট্রেন + পাহাড়ি রাস্তার ঝাঁকুনি","must"],
+    ["সিলিকা জেল প্যাক কেসের ভেতর","আর্দ্রতা ৮৫%+ — লেন্সে ও সেন্সরে ফগ ধরে","must"],
+    ["মাইক্রোফাইবার কাপড় ও লেন্স ক্লিনার"],
+    ["ল্যান্ডিং প্যাড","ভেজা কাদামাটি ও বালিতে টেকঅফ করলে মোটর নষ্ট হয়"],
+    ["ফোনে ফার্মওয়্যার ও অফলাইন ম্যাপ আগে থেকে আপডেট","ওখানে নেটওয়ার্ক পাবে না","must"],
+    ["ওড়ানোর আগে বাতাসের গতি দেখো","২৪৯g ড্রোন ১৫-২০ km/h বাতাসেই ভেসে যায়, ফিরিয়ে আনা যায় না","must"],
+    ["সামান্য গুঁড়ি বৃষ্টিতেও ওড়াবে না","এই ক্লাসের ড্রোন ওয়াটারপ্রুফ না, মোটরে পানি ঢুকলেই শেষ","must"],
+    ["ভিড়ের ওপর ওড়াবে না — জিরো পয়েন্টের ঘাট, দরগা এলাকা","পড়লে মানুষ আহত হবে, তখন নিয়ম কী বলে কেউ শুনবে না","must"],
+    ["নৌকা থেকে টেকঅফ/ল্যান্ডিং করবে না","দোলে, আর পানিতে পড়লে ড্রোন শেষ","must"],
+    ["ওড়ানোর সময় ওয়াইফকে বেবির দায়িত্বে রাখো","একসাথে ড্রোন ওড়ানো আর বাচ্চা সামলানো যায় না — এখানেই দুর্ঘটনা ঘটে","must"]
+  ]},
+
+  {i:"i-bottle", n:"বেবি গিয়ার ও খাবার", items:[
+    ["ডায়াপার — ২৫-৩০টা","৪ দিনে দিনে ৬-৭টা + ব্যাকআপ; সিলেটে ব্র্যান্ড নাও পেতে পারো","must"],
+    ["ডায়াপার ডিসপোজাল ব্যাগ","baby"],
+    ["বেবি ক্যারিয়ার (স্ট্রলার নয়)","জাফলং, বিছনাকান্দির পাথুরে রাস্তায় স্ট্রলার একেবারেই চলবে না","must"],
+    ["ফিডার / সিপি কাপ — ২টা","baby"],
+    ["ফর্মুলা মিল্ক / গুঁড়ো দুধ — পুরো ট্রিপের","হোটেলে গরম পানি পাবে, দুধ পাবে না","must"],
+    ["ফ্লাস্ক (গরম পানির)","ট্রেনে ও নৌকায় দুধ বানাতে","must"],
+    ["বেবির খাবার — সেরেলাক/সুজি/বিস্কুট","সিলেটি খাবার প্রচণ্ড ঝাল, বেবি খেতে পারবে না","must"],
+    ["ছোট বাটি, চামচ, প্লেট","baby"],
+    ["পছন্দের ২-৩টা খেলনা ও একটা বই","৭ ঘণ্টার ট্রেন যাত্রায় বাঁচাবে","must"],
+    ["বাচ্চার প্রিয় জিনিস (কম্ফোর্ট অবজেক্ট)","অচেনা জায়গায় ঘুমাতে সাহায্য করে"],
+    ["বেবির লাইফ জ্যাকেট আগে থেকে নিশ্চিত করো","নৌকায় ওঠার আগে বাচ্চার সাইজের জ্যাকেট আছে কিনা দেখে নাও","must"],
+    ["বাচ্চার পকেটে নাম ও তোমার নম্বর লেখা কাগজ","ভিড়ে হারিয়ে গেলে","must"]
+  ]},
+
+  {i:"i-train", n:"Day 1 — ট্রেনের ডে-প্যাক (৭ ঘণ্টা)", items:[
+    ["শুকনো খাবার: বিস্কুট, কেক, বাদাম, চিপস","পারাবত এক্সপ্রেসে খাবার আছে কিন্তু বেবির উপযোগী না","must"],
+    ["পানির বোতল — ৩টা (১ লিটার)","must"],
+    ["বেবির ডায়াপার ৫টা + ওয়াইপস — হাতের ব্যাগে","must"],
+    ["বেবির এক সেট এক্সট্রা কাপড় — হাতের ব্যাগে","must"],
+    ["মোশন সিকনেসের ওষুধ — যাত্রার ৩০ মিনিট আগে","must"],
+    ["পাতলা চাদর/কাঁথা — AC কোচে ঠান্ডা লাগে"],
+    ["ফোনে বেবির কার্টুন/গান আগে থেকে ডাউনলোড","নেটওয়ার্ক ভরসা করা যাবে না","must"],
+    ["হ্যান্ড স্যানিটাইজার ও টিস্যু — হাতের ব্যাগে"],
+    ["ভোর ৪:৩০-এ উঠতে হবে — অ্যালার্ম ২টা সেট","৬:৩০-এর ট্রেন, কমলাপুর পৌঁছাতে সময় লাগবে","must"]
+  ]},
+
+  {i:"i-boat", n:"Day 2–3 — বোট ট্রিপ ডে-প্যাক", items:[
+    ["লাইফ জ্যাকেট নিশ্চিত করো — ৩ জনেরই","প্ল্যানে স্পষ্ট বলা আছে: সব যাত্রীর লাইফ জ্যাকেট বাধ্যতামূলক","must"],
+    ["ড্রাই ব্যাগে: ফোন, টাকা, NID, পাওয়ার ব্যাংক","must"],
+    ["এক সেট শুকনো কাপড় — ৩ জনের","ভিজে ফেরার সম্ভাবনা প্রায় ১০০%","must"],
+    ["গামছা/টাওয়েল — ৩টা","must"],
+    ["পানি ও শুকনো খাবার সাথে নাও","\"খাদ্য পানীয় সাথে রাখুন, বিশেষত নৌকা ভ্রমণে\" — ভ্রমণ গাইড","must"],
+    ["বেবির দুধ, ফ্লাস্ক, স্ন্যাকস","৪ ঘণ্টা পানিতে থাকতে হবে (পাংথুমাই-বিছনাকান্দি লুপ)","must"],
+    ["ছাতা ও রেইনকোট — নৌকায় ছাউনি নাও থাকতে পারে","must"],
+    ["সকালে ffwc.gov.bd দেখে বন্যা পরিস্থিতি চেক করো","পানি বাড়লে স্পট ২৪ ঘণ্টার নোটিশে বন্ধ হয়ে যায়","must"],
+    ["পরিবারকে লাইভ লোকেশন শেয়ার করো","সালুটিকরের পরে সিগন্যাল থাকবে না","must"],
+    ["পাথরের ওপর বেবিকে কোলে/ক্যারিয়ারে রাখো — হাঁটতে দিও না","must"],
+    ["চোরাবালি ও গভীর পানি এড়িয়ে চলো","পানির নিচের স্রোত দেখা যায় না"]
+  ]},
+
+  {i:"i-bag", n:"ব্যাগ ও অন্যান্য", items:[
+    ["বড় লাগেজ — ১টা (৩ জনের কাপড়)"],
+    ["ব্যাকপ্যাক — ১টা (ডে-প্যাক হিসেবে)","must"],
+    ["বেবির আলাদা ছোট ব্যাগ","must"],
+    ["ফোল্ডেবল শপিং ব্যাগ","আম্বরখানা/জিন্দাবাজারে কেনাকাটার জন্য"],
+    ["কাপড় শুকানোর দড়ি ও ক্লিপ","হোটেলে ভেজা কাপড় শুকাতে — বর্ষায় সোনার হরিণ","must"],
+    ["ছোট ডিটারজেন্ট প্যাক","বেবির কাপড় ধুতে হবেই"],
+    ["লক ও চাবি — লাগেজের"],
+    ["ছোট ব্যাগ/পাউচ ওষুধের জন্য"],
+    ["নোটবুক ও কলম"],
+    ["ছোট কাঁচি ও সেফটি পিন"]
+  ]},
+
+  {i:"i-plane", n:"Day 4 — ফেরার দিনের চেক", items:[
+    ["চেকআউটের আগে রুম, ড্রয়ার, বাথরুম ভালোভাবে দেখে নাও","চার্জার সবচেয়ে বেশি ফেলে আসা জিনিস","must"],
+    ["পাওয়ার ব্যাংক ও লাইটার হ্যান্ড ব্যাগে সরাও","must"],
+    ["১০০ মিলির বেশি তরল চেক-ইন লাগেজে","শ্যাম্পু, স্যানিটাইজার, বেবি লোশন","must"],
+    ["বেবির দুধ ও পানি হ্যান্ড ব্যাগে রাখা যাবে","শিশুর খাবার হিসেবে ছাড় পাওয়া যায়"],
+    ["ভেজা/নোংরা কাপড় আলাদা পলিথিনে"],
+    ["চা বাগান থেকে চা পাতা কিনলে সিল করা প্যাকেটে"],
+    ["হোটেল থেকে বের হও ১২:১৫-এ","২:৩০-এর ফ্লাইট, ওসমানী এয়ারপোর্ট","must"],
+    ["বাচ্চার কানের জন্য টেকঅফ/ল্যান্ডিংয়ে পানি বা সিপি কাপ","চাপে কান ব্যথা করে, চোষা/গেলা আরাম দেয়","must"]
+  ]},
+
+  {i:"i-home", n:"রওনা হওয়ার আগে ঘরের কাজ", items:[
+    ["সব ফোন ও পাওয়ার ব্যাংক ফুল চার্জ","must"],
+    ["সব মোবাইলে পর্যাপ্ত ডেটা ও ব্যালেন্স রিচার্জ","must"],
+    ["গ্যাস, পানি, বিদ্যুতের লাইন বন্ধ"],
+    ["ফ্রিজে পচনশীল খাবার সরিয়ে ফেলো"],
+    ["প্রতিবেশী/পরিবারকে বাসার চাবি ও ট্রিপের তথ্য দাও"],
+    ["ট্যুর প্ল্যানের লিংক পরিবারের সাথে শেয়ার","shawon39.github.io/sylhet-tour"],
+    ["হোটেল ও মাইক্রোবাসের নম্বর পরিবারকে দাও"],
+    ["ব্যাগের ওজন চেক করো","ফ্লাইটে ফিরবে — ব্যাগেজ লিমিট আগে দেখে নাও","must"],
+    ["গোছানো শেষে পুরো চেকলিস্ট আরেকবার পড়ো","must"]
+  ]}
+];
+
+const NS = 'http://www.w3.org/2000/svg';
+function icon(id, cls){
+  return `<svg class="ic ${cls||''}"><use href="#${id}"/></svg>`;
+}
+
+function setIgBtn(li, btn){
+  const on = li.classList.contains('ignored');
+  btn.innerHTML = icon(on ? 'i-undo' : 'i-eyeoff');
+  btn.title = on ? 'ফিরিয়ে আনো' : 'ইগনোর করো';
+}
+
+const grid = document.getElementById('grid');
+let store = {};
+try { store = JSON.parse(localStorage.getItem('sylhet-pack-2026') || '{}'); } catch(e){ store = {}; }
+function save(){ try{ localStorage.setItem('sylhet-pack-2026', JSON.stringify(store)); }catch(e){} }
+
+DATA.forEach((sec, si) => {
+  const s = document.createElement('section');
+  s.innerHTML = `
+    <div class="head">
+      <div class="ico">${icon(sec.i)}</div>
+      <div class="htitle">
+        <div class="n">${sec.n}</div>
+        <div class="c"><span class="sd">0</span>/<span class="st">${sec.items.length}</span></div>
+      </div>
+      <div class="caret">${icon('i-caret')}</div>
+    </div>
+    <ul></ul>`;
+  const ul = s.querySelector('ul');
+  sec.items.forEach((it, ii) => {
+    const label = it[0], note = it[1], tag = it[2];
+    const t = (note === 'must' || note === 'baby') ? note : tag;
+    const desc = (note === 'must' || note === 'baby') ? null : note;
+    const id = si + '-' + ii;
+    const li = document.createElement('li');
+    li.dataset.id = id;
+    li.innerHTML = `<div class="box">${icon('i-check')}</div>
+      <div class="lbl">${label}${desc ? `<small>${desc}</small>` : ''}</div>
+      ${t === 'must' ? '<span class="tag t-must">MUST</span>' : t === 'baby' ? '<span class="tag t-baby">BABY</span>' : ''}`;
+    const ig = document.createElement('button');
+    ig.className = 'ig';
+    ig.title = 'ইগনোর করো';
+    ig.innerHTML = icon('i-eyeoff');
+    li.appendChild(ig);
+
+    if (store[id] === 'done' || store[id] === true) li.classList.add('done');
+    if (store[id] === 'ignored') { li.classList.add('ignored'); setIgBtn(li, ig); }
+
+    li.onclick = () => {
+      if (li.classList.contains('ignored')) return;
+      li.classList.toggle('done');
+      store[id] = li.classList.contains('done') ? 'done' : null;
+      if (!store[id]) delete store[id];
+      save(); update();
+    };
+    ig.onclick = e => {
+      e.stopPropagation();
+      const nowIg = !li.classList.contains('ignored');
+      li.classList.toggle('ignored', nowIg);
+      li.classList.remove('done');
+      if (nowIg) store[id] = 'ignored'; else delete store[id];
+      setIgBtn(li, ig);
+      save(); update();
+    };
+    ul.appendChild(li);
+  });
+  s.querySelector('.head').onclick = () => s.classList.toggle('closed');
+  grid.appendChild(s);
+});
+
+const C = 2 * Math.PI * 22;
+function update(){
+  let done = 0, tot = 0, ign = 0;
+  document.querySelectorAll('section').forEach(s => {
+    const active = s.querySelectorAll('li:not(.ignored)').length;
+    const d = s.querySelectorAll('li.done').length;
+    const i = s.querySelectorAll('li.ignored').length;
+    s.querySelector('.sd').textContent = d;
+    s.querySelector('.st').textContent = active;
+    done += d; tot += active; ign += i;
+  });
+  document.getElementById('cdone').textContent = done;
+  document.getElementById('ctot').textContent = tot;
+  document.getElementById('ignum').textContent = ign;
+  document.getElementById('showig').style.display = ign ? '' : 'none';
+  const p = tot ? done / tot : 0;
+  document.getElementById('pct').textContent = Math.round(p * 100) + '%';
+  document.getElementById('prog').style.strokeDashoffset = C * (1 - p);
+}
+update();
+
+document.getElementById('filter').onclick = e => {
+  const b = e.currentTarget;
+  document.body.classList.toggle('hide-done');
+  b.classList.toggle('on', document.body.classList.contains('hide-done'));
+};
+let open = true;
+document.getElementById('expand').onclick = e => {
+  open = !open;
+  document.querySelectorAll('section').forEach(s => s.classList.toggle('closed', !open));
+  e.currentTarget.querySelector('span').textContent = open ? 'সব বন্ধ করুন' : 'সব খুলুন';
+};
+document.getElementById('showig').onclick = e => {
+  const b = e.currentTarget;
+  document.body.classList.toggle('show-ignored');
+  b.classList.toggle('on', document.body.classList.contains('show-ignored'));
+};
+
+document.getElementById('alert').querySelector('.ahead').onclick = () => {
+  document.getElementById('alert').classList.toggle('closed');
+};
+
+const root = document.documentElement;
+let theme = 'light';
+function applyTheme(t){
+  if (t === 'dark') root.setAttribute('data-theme','dark');
+  else root.removeAttribute('data-theme');
+  document.getElementById('themeuse').setAttribute('href', t === 'dark' ? '#i-sun' : '#i-moon');
+}
+try{ theme = localStorage.getItem('sylhet-theme') || 'light'; }catch(e){}
+applyTheme(theme);
+document.getElementById('theme').onclick = () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+  try{ localStorage.setItem('sylhet-theme', theme); }catch(err){}
+};
+
+document.getElementById('reset').onclick = () => {
+  if (!confirm('সব টিক ও ইগনোর মুছে ফেলবে?')) return;
+  store = {}; save();
+  document.querySelectorAll('li').forEach(l => {
+    l.classList.remove('done','ignored');
+    const b = l.querySelector('.ig'); if (b) setIgBtn(l, b);
+  });
+  update();
+};
+</script>
+</body>
+</html>

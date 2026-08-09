@@ -119,9 +119,14 @@ body[data-lang="bn"] .panel p{max-width:58ch}
 /* ===================== language bar ===================== */
 .langbar{
   position:sticky;top:0;z-index:20;background:var(--paper);
-  padding:14px 0 12px;display:flex;justify-content:flex-end;
+  padding:14px 0 12px;display:flex;justify-content:space-between;align-items:center;gap:14px;
   border-bottom:1px solid var(--rule-soft)
 }
+.checklist-link{
+  font-size:13.5px;font-weight:600;padding:0 2px;
+  color:var(--ink);text-decoration:none;white-space:nowrap
+}
+.checklist-link:hover{background:var(--jade-soft);color:var(--jade)}
 .langbar button{
   font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.09em;text-transform:uppercase;
   background:transparent;color:var(--ink-2);border:1px solid var(--rule);
@@ -416,8 +421,13 @@ body[data-lang="bn"] [data-t="en"]{display:none !important}
 <div class="wrap">
 
 <div class="langbar" role="group" aria-label="Language / ভাষা">
-  <button type="button" id="btn-bn" aria-pressed="true">বাংলা</button>
-  <button type="button" id="btn-en" aria-pressed="false">English</button>
+  <a class="checklist-link" href="sylhet-packing-checklist.html">
+    <span data-t="en">Packing checklist →</span><span data-t="bn">প্যাকিং চেকলিস্ট →</span>
+  </a>
+  <span style="display:flex">
+    <button type="button" id="btn-bn" aria-pressed="true">বাংলা</button>
+    <button type="button" id="btn-en" aria-pressed="false">English</button>
+  </span>
 </div>
 
 <details class="toc" id="toc">
